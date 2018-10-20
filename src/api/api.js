@@ -49,6 +49,28 @@ class API extends Server{
       throw err
     }
   }
+
+   /**
+   * 获取用户消息
+   * @param {*} get的拼接参数
+   */
+  async getUser (params = {}) {
+    try {
+      let result = await this.axios('get', '/v1/user' + getUrlConcat(params) , params)
+      if (result.status !== 0 && (result instanceof Object)) {
+        return result || []
+      } else {
+        let err = {
+          tip: '登录失败',
+          response: result,
+          data: params,
+        }
+        throw err
+      }
+    } catch (err) {
+      throw err
+    }
+  }
 }
 
 export default new API()
