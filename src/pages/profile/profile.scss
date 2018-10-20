@@ -1,0 +1,16 @@
+@import '../../style//base.scss';
+
+.profile-container{
+  p, span{
+    font-family: Helvetica Neue,Tahoma,Arial;
+  }
+  .profile-number{
+    padding-top: 1.95rem;
+    .profile-link{
+      display: block;
+      @include flex();
+      padding: .666667rem .6rem;
+      background-color: $blue;
+    }
+  }
+}
