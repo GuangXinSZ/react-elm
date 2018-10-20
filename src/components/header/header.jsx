@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import './header.scss'
 import PropTypes from 'prop-types'
-import { spawn } from 'child_process';
+import { connect } from 'react-redux'
+import {getStore} from '../../utils/commons'
+import {saveUserInfo} from '@/store/login/action'
 
 class Header extends Component {
   static defaullProps = {
@@ -11,11 +13,15 @@ class Header extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     signUp: PropTypes.bool,
-    goBack: PropTypes.bool
+    goBack: PropTypes.bool,
+    saveUserInfo: PropTypes.func.isRequired,
   }
   state = {
     userInfo: '1',
     headTitle: '首页'
+  }
+  componentDidMount () {
+    
   }
   render () {
     return (
@@ -29,4 +35,8 @@ class Header extends Component {
   }
 }
 
-export default Header
+
+export default connect(state => ({
+}), {
+  saveUserInfo,
+})(Header)
