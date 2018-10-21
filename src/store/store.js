@@ -1,9 +1,9 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
-import * as login from './login/reducer'
+import * as user from './user/reducer'
 import thunk from 'redux-thunk'
 
 let store = createStore(
-  combineReducers({...login}),
+  combineReducers({...user}),
   applyMiddleware(thunk)
 )
 

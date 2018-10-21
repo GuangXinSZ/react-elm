@@ -1,4 +1,5 @@
-@import '../../style//base.scss';
+@import '../../style/mixin.scss';
+@import '../../assets/iconfont/iconfont.css';
 
 .profile-container{
   p, span{
@@ -8,9 +9,30 @@
     padding-top: 1.95rem;
     .profile-link{
       display: block;
-      @include flex();
+      @include flex(none);
+      box-align: center;
       padding: .666667rem .6rem;
       background-color: $blue;
+      .private-image{
+        display: inline-block;
+        @include wh(2.5rem, 2.5rem);
+        border-radius: 50%;
+        vertical-align: middle;
+      }
+      .user-info{
+        margin-left: .48rem;
+        flex-grow: 1;
+        p{
+          font-weight: 700;
+          @include font(.8rem, #fff)
+        }
+        .icon-tel{
+          display: inline-block;
+        }
+      }
+      .icon-arrow-right{
+        @include font(18px, #fff)
+      }
     }
   }
 }

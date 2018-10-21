@@ -5,7 +5,7 @@ import Header from '@/components/header/header'
 import PropTypes from 'prop-types'
 import './login.scss'
 import {setStore} from '../../utils/commons'
-import {saveUserInfo} from '@/store/login/action'
+import {saveUserInfo} from '@/store/user/action'
 import API from '../../api/api'
 
 
