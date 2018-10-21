@@ -1,5 +1,5 @@
 import Server from './server'
-
+import {getUrlConcat} from '../utils/commons'
 class API extends Server{
   /**
    *  用途：获取验证码
