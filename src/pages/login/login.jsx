@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Header from '@/components/header/header'
+import AlertTip from '@/components/alert_tip/alert_tip'
 import PropTypes from 'prop-types'
 import './login.scss'
 import {setStore} from '../../utils/commons'
@@ -17,6 +18,8 @@ class Login extends Component {
   state = {
     mobileCode: '',
     userAccount: '',
+    hasAlert: false,
+    alertText: '',
     password: '',
     codeNumber: '',
     captchaCodeImg: '',
@@ -31,14 +34,48 @@ class Login extends Component {
     }
     this.setState(newState)
   }
-
+  closeTip = () => {
+    this.setState({
+      hasAlert: false
+    })
+  }
   mobileLogin = async () => {
+    let isValidate, alertText
+    if (this.state.loginWay) {
+
+    } else {
+      if (!this.state.userAccount) {
+        alertText = '请输入手机号/邮箱/用户名'
+        isValidate = true
+      } else if (!this.state.password){
+        alertText = '请输入密码'
+        isValidate = true
+      } else if (!this.state.codeNumber) {
+        alertText = '请输入验证码'
+        isValidate = true
+      }
+      if (isValidate) {
+        this.setState({
+          hasAlert: true,
+          alertText
+        })
+        return
+      }
+    }
     let data = {
       username: this.state.userAccount,
       password: this.state.password,
       captcha_code: this.state.codeNumber
     }
     let res = await API.accountLogin({}, data)
+    if (res.tip) {
+      this.setState({
+        hasAlert: true,
+        alertText: res.response.message
+      })
+      if (!this.state.loginWay) this.getCaptchaCode();
+      return
+    }
     setStore('user_id', res.user_id)
     this.props.saveUserInfo(res)
     this.props.history.push('/profile')
@@ -61,7 +98,7 @@ class Login extends Component {
   }
   render() {
     return <div className="login-container">
-        <Header title="密码登录" goBack="true" />
+        <Header title="密码登录" goBack={true} />
         {this.state.loginWay?<form className="login-form">
           <section className="input-container phone-number">
             <input type="text" placeholder="账户密码随便输入" name="phone" maxLength="11" value={this.state.mobileCode} />
@@ -83,7 +120,7 @@ class Login extends Component {
           </div>
         </section>
         <section className='input-container captcha-code-container'>
-          <input type="text" placeholder='验证码' maxlength='4' value={this.state.codeNumber} onChange={this.handleInput.bind(this, 'codeNumber')} />
+          <input type="text" placeholder='验证码' maxLength='4' value={this.state.codeNumber} onChange={this.handleInput.bind(this, 'codeNumber')} />
           <div className='img-change-img'>
             <img src={this.state.captchaCodeImg} alt="img is wrong"/>
             <div className='change-img' onClick={this.getCaptchaCode.bind(this)}>
@@ -101,7 +138,8 @@ class Login extends Component {
       </p>
       <div className='login-button' onClick={this.mobileLogin}>登录</div>
       <Link to='/forget' className='to-forget'>重置密码?</Link>
-      </div>
+      {this.state.hasAlert&&<AlertTip closeTip={this.closeTip} alertText={this.state.alertText}/>}
+    </div>
   }
 }
 

@@ -24,20 +24,20 @@
         flex-grow: 1;
         p{
           font-weight: 700;
-          @include font(.8rem, #fff)
+          @include font(.8rem, $fc)
         }
         .icon-tel{
           display: inline-block;
         }
       }
       .icon-arrow-right{
-        @include font(18px, #fff)
+        @include font(18px, $fc)
       }
     }
   }
   .info-data{
     width: 100%;
-    background-color: #fff;
+    background-color: $fc;
     box-sizing: border-box;
     ul{
       .info-data-link{
@@ -85,7 +85,7 @@
   }
   .profile-list{
     margin-top: .4rem;
-    background-color: #fff;
+    background-color: $fc;
     .myorder{
       padding-left: 1.1rem;
       @include flex();
@@ -106,7 +106,7 @@
       }
       .icon-changyonglogo40{
         background-color: $blue;
-        @include font(.65rem, #fff);
+        @include font(.65rem, $fc);
         border-radius: .1rem;
       }
       .myorder-text{

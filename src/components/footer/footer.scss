@@ -1,4 +1,6 @@
 @import '../../style/mixin.scss';
+@import '../../assets/iconfont/iconfont.css';
+
 
 .footer-container{
   background-color: #fff;
@@ -34,9 +36,19 @@
     .icon-account{
       @include font(0.80rem, #666);
       margin-top: -0.2rem;
+      color: $blue!important;
+      fill: $blue;
     }
     span{
       @include font(.48rem, #666)
     }
+  }
+}
+
+.active{
+  color: $blue;
+  font-size: 25px;
+  .icon-stlye{
+    color: $blue!important;
   }
 }

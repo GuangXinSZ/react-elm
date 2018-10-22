@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 import './footer.scss'
+import '../../assets/iconfont/iconfont.js';
 
 class Footer extends Component {
   static propTypes = {
@@ -13,22 +14,22 @@ class Footer extends Component {
   render () {
     return (
       <section className='footer-container'>
-        <div className='guide-item'>
+        <NavLink className='guide-item' to='profile1'>
           <div className='icon-changyonglogo40 icon-style'></div>
           <span className='spec-text'>外卖</span>
-        </div>
-        <div className='guide-item'>
+        </NavLink>
+        <NavLink className='guide-item' to='profile1'>
           <div className='icon-zhinanzhen icon-style'></div>
           <span>搜索</span>
-        </div>
-        <div className='guide-item'>
+        </NavLink>
+        <NavLink className='guide-item' to='profile1'>
           <div className='icon-dingdan icon-style'></div>
           <span>订单</span>
-        </div>
-        <div className='guide-item'>
+        </NavLink>
+        <NavLink className='guide-item' to='/profile'>
           <div className='icon-account icon-style'></div>
           <span>我的</span>
-        </div>
+        </NavLink>
       </section>
     )
   }
