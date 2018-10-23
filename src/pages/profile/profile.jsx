@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Switch, Route, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Header from '@/components/header/header'
@@ -53,13 +53,16 @@ class Profile extends Component {
   componentDidMount () {
     this.getUserInfo()
   }
+  goTo = () => {
+    window.location.href = 'http://www.baidu.com'
+  }
   render () {
     return (
       <div className='profile-container'>
         <Header title="我的" goBack="true" />
         <section >
           <section className='profile-number'>
-            <Link to={this.props.userInfo&&this.props.userInfo.user_id?'/profile/info':'/login'} className='profile-link'>
+            <Link to={this.props.userInfo&&this.props.userInfo.user_id?'/info':'/login'} className='profile-link'>
               <img src={this.state.imgUrl} alt='img is wrong' className='private-image'/>
               <div className='user-info'>
                 <p>{this.state.username}</p>

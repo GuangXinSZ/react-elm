@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import {HashRouter, Switch, Route, Redirect} from 'react-router-dom'
 import asyncComponent from '@/utils/asyncComponent'
-
 import home from '@/pages/home/home'
 const login = asyncComponent(() => import("@/pages/login/login"))
 const profile = asyncComponent(() => import("@/pages/profile/profile"))
+const info = asyncComponent(() => import("@/pages/info/info"))
+
 
 export default class RouteConfig extends Component {
   render () {
@@ -13,7 +14,9 @@ export default class RouteConfig extends Component {
         <Switch>
           <Route path="/" exact component= {login}> </Route>
           <Route path="/profile"  component= {profile}> </Route>
+          <Route path="/info"  component= {info}> </Route>
         </Switch>
+
       </HashRouter>
     )
   }

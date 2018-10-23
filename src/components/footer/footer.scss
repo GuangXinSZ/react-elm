@@ -36,7 +36,6 @@
     .icon-account{
       @include font(0.80rem, #666);
       margin-top: -0.2rem;
-      color: $blue!important;
       fill: $blue;
     }
     span{
@@ -48,7 +47,11 @@
 .active{
   color: $blue;
   font-size: 25px;
-  .icon-stlye{
+  .icon-style{
+    color: $blue!important;
+    font-weight: bold;
+  }
+  span{
     color: $blue!important;
   }
 }
