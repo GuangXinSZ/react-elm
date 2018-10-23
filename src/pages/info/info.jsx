@@ -40,10 +40,7 @@ class Info extends Component {
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}>
           <Header title="账户消息" goBack={this.goBack} />
-          <div >1232321321</div>
-          <div >1232321321</div>
-          <div >1232321321</div>
-          <div >1232321321</div>
+          <div className='test'>1232321321</div>
 
 
         </ReactCSSTransitionGroup> 
