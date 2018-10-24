@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Header from '@/components/header/header'
 import Footer from '@/components/footer/footer'
+import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import QueueAnim from 'rc-queue-anim'
+import {getStore} from '../../utils/commons'
 import {saveAvander, saveUserInfo} from '@/store/user/action'
 import './profile.scss'
 import {getImgPath} from '../../utils/commons'
@@ -27,6 +29,7 @@ class Profile extends Component {
     pointNumber : 0,       //积分数
   }
   initData  = () => {
+    console.log('init')
     let newState = {}
     if (this.props.userInfo && this.props.userInfo.user_id) {
       newState.avatar = this.props.userInfo.avatar
@@ -45,14 +48,37 @@ class Profile extends Component {
   }
 
   getUserInfo = async () => {
+    console.log(3131)
     let res = await API.getUser()
     this.props.saveUserInfo(res)
     this.initData()
     
   }
-  componentDidMount () {
+
+  goBack = () => {
+    this.props.history.goBack()
+  }
+  componentWillMount () {
+    console.log('dimount')
+    if (this.props.userInfo.user_id) {
+      this.initData()
+      return
+    }
     this.getUserInfo()
   }
+
+  componentWillReceiveProps(nextProps){  // 属性props改变时候触发
+    console.log('recu')
+    if(!is(fromJS(this.props.proData), fromJS(nextProps.proData))){   //
+      this.initData(nextProps);
+    }
+  }
+ 
+  shouldComponentUpdate(nextProps, nextState) {   // 判断是否要更新render, return true 更新  return false不更新
+    console.log('udapte')
+    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
+  }
+
   goTo = () => {
     window.location.href = 'http://www.baidu.com'
   }
@@ -60,7 +86,7 @@ class Profile extends Component {
     return (
       <div className='profile-container'>
       <QueueAnim type='bottom'>
-        <Header title="我的" goBack="true"  key='s1'/>
+        <Header title="我的" goBack={this.goBack}  key='s1'/>
         <section  key='s2'>
             <section className='profile-number' >
               <Link to={this.props.userInfo&&this.props.userInfo.user_id?'/info':'/login'} className='profile-link'>
