@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Switch, Route} from 'react-router-dom'
 import { is, fromJS } from 'immutable';
 import AlertTip from '@/components/alert_tip/alert_tip'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import QueueAnim from 'rc-queue-anim'
 import Header from '@/components/header/header'
 import {saveImg} from '@/store/user/action'
-// import {imgUrl} from '@/config/envconfig'
 import envconfig from '@/config/envconfig';   // 环境变量的配置
 import API from '../../api/api'
 import './info.scss'
@@ -49,9 +49,11 @@ class Info extends Component {
   render () {
     return (
       <div className='rating-page'>
-          <Header title="账户消息" goBack={this.goBack} />
-          <section className='profile-info'>
-            <section className='headportrait'>
+        <QueueAnim type='bottom'>
+          <Header title="账户消息" goBack={this.goBack} key='o1'/>
+          <section className='profile-info' key=''o2>
+          <QueueAnim>
+            <section className='headportrait' key='k1'>
               <input type="file" className='profile-info-upload' onChange={this.uploadImg}/>
               <h2>头像</h2>
               <div className='info-avatar'>
@@ -59,7 +61,7 @@ class Info extends Component {
                   <div className='icon-arrow-right'></div>
               </div>
             </section>
-            <Link to='/info/setusername' className='info-router'>
+            <Link to='/setuser/name' className='info-router' key='k2'>
               <section className='headportrait headportraitwo'>
                 <h2>用户名</h2>
                 <div className='info-avatar'>
@@ -68,7 +70,7 @@ class Info extends Component {
                 </div>
               </section>
             </Link>
-            <Link to='/info/setusername' className='info-router'>
+            <Link to='/info/setusername' className='info-router' key='k3'>
               <section className='headportrait headportraithree'>
                 <h2>收获地址</h2>
                 <div className='info-avatar'>
@@ -77,10 +79,10 @@ class Info extends Component {
                 </div>
               </section>
             </Link>
-            <section class="bind-phone">
+            <section class="bind-phone" key='k4'>
                 账号绑定
             </section>
-            <Link to='/info/setusername' className='info-router'>
+            <Link to='/info/setusername' className='info-router' key='k5'>
               <section className='headportrait headportraitfour'>
                 <div className='headport-phone'>
                   <div className='icon-shouji'></div>
@@ -91,10 +93,10 @@ class Info extends Component {
                 </div>
               </section>
             </Link>
-            <section class="bind-phone">
+            <section class="bind-phone" key='k5'>
                 安全设置
             </section>
-            <Link to='/info/setusername' className='info-router'>
+            <Link to='/info/setusername' className='info-router' key='k6'>
               <section className='headportrait headportraithree'>
                 <h2>登录密码</h2>
                 <div className='info-avatar'>
@@ -103,10 +105,11 @@ class Info extends Component {
                 </div>
               </section>
             </Link>
-            <section className='exit-login'>退出登录</section>
+            <section className='exit-login' key='k7'>退出登录</section>
+             </QueueAnim>
           </section>
       {this.state.hasAlert&&<AlertTip closeTip={this.closeTip} alertText={this.state.alertText}/>}
-          
+      </QueueAnim>
       </div>
     )
   }
