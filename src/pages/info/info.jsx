@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import { is, fromJS } from 'immutable';
 import {connect} from 'react-redux'
 import Header from '@/components/header/header'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';  // react的css动画组件
 import './info.scss'
 
 
@@ -12,15 +11,10 @@ class Info extends Component {
 
   }
   state = {
+    imgUrl: '//elm.cangdu.org/img/1669599be6119829.jpg'
 
   }
-    // css动画组件设置为目标组件
-  FirstChild = props => {
-    console.log(props)
-    const childrenArray = React.Children.toArray(props.children);
-    console.log(childrenArray)
-    return childrenArray[0] || null;
-  }
+
   goBack = () => {
     this.props.history.goBack()
   }
@@ -33,17 +27,18 @@ class Info extends Component {
   }
   render () {
     return (
-      <div>
-        <ReactCSSTransitionGroup
-          // component='div'
-          transitionName="info"
-          transitionEnterTimeout={300}
-          transitionLeaveTimeout={300}>
+      <div className='rating-page'>
           <Header title="账户消息" goBack={this.goBack} />
-          <div className='test'>1232321321</div>
-
-
-        </ReactCSSTransitionGroup> 
+          <section className='profile-info'>
+            <section className='headportrait'>
+              <input type="file" className='profile-info-upload'/>
+              <h2>头像</h2>
+              <div className='info-avatar'>
+                  <img src={this.state.imgUrl} alt="img id wrong" className='headport-top'/>
+                  <div className='icon-arrow-right'></div>
+              </div>
+            </section>
+          </section>
       </div>
     )
   }

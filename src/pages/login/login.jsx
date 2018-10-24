@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Header from '@/components/header/header'
 import AlertTip from '@/components/alert_tip/alert_tip'
 import PropTypes from 'prop-types'
+import Animate from 'rc-animate'
 import './login.scss'
 import {setStore} from '../../utils/commons'
 import {saveUserInfo} from '@/store/user/action'
@@ -97,7 +98,9 @@ class Login extends Component {
     this.getCaptchaCode()
   }
   render() {
-    return <div className="login-container">
+    return (
+      <Animate transitionName='fade'>
+    <div className="login-container">
         <Header title="密码登录" goBack={true} />
         {this.state.loginWay?<form className="login-form">
           <section className="input-container phone-number">
@@ -140,6 +143,9 @@ class Login extends Component {
       <Link to='/forget' className='to-forget'>重置密码?</Link>
       {this.state.hasAlert&&<AlertTip closeTip={this.closeTip} alertText={this.state.alertText}/>}
     </div>
+    </Animate>
+    )
+    
   }
 }
 

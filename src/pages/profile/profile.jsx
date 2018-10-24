@@ -4,12 +4,14 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Header from '@/components/header/header'
 import Footer from '@/components/footer/footer'
+import QueueAnim from 'rc-queue-anim'
+import ScrollAnim from 'rc-scroll-anim'
 import {saveAvander, saveUserInfo} from '@/store/user/action'
 import './profile.scss'
 import {getImgPath} from '../../utils/commons'
 import API from '../../api/api'
 
-
+const ScrollOverPack = ScrollAnim.OverPack;
 class Profile extends Component {
   static propTypes = {
     userInfo: PropTypes.object.isRequired,
@@ -59,77 +61,82 @@ class Profile extends Component {
   render () {
     return (
       <div className='profile-container'>
-        <Header title="我的" goBack="true" />
-        <section >
-          <section className='profile-number'>
-            <Link to={this.props.userInfo&&this.props.userInfo.user_id?'/info':'/login'} className='profile-link'>
-              <img src={this.state.imgUrl} alt='img is wrong' className='private-image'/>
-              <div className='user-info'>
-                <p>{this.state.username}</p>
-                <p>
-                  <div className='icon-tel'></div>
-                  <span className='icon-mobile-number'>{this.state.mobile}</span>
-                </p>
-              </div>
-              <div className='icon-arrow-right'>
-              </div>
-            </Link>
-          </section>
-          <section className='info-data'>
-            <ul className='clear'>
-              <Link to='/balance' className='info-data-link'>
-                <span className='info-data-top'><b>{parseInt(this.state.balance).toFixed(2)}</b>元</span>
-                <span className='info-data-bottom'>我的余额</span>
+      <QueueAnim type='bottom'>
+        <Header title="我的" goBack="true"  key='s1'/>
+        <section  key='s2'>
+            <section className='profile-number' >
+              <Link to={this.props.userInfo&&this.props.userInfo.user_id?'/info':'/login'} className='profile-link'>
+                <img src={this.state.imgUrl} alt='img is wrong' className='private-image'/>
+                <div className='user-info'>
+                  <p>{this.state.username}</p>
+                  <p>
+                    <div className='icon-tel'></div>
+                    <span className='icon-mobile-number'>{this.state.mobile}</span>
+                  </p>
+                </div>
+                <div className='icon-arrow-right'>
+                </div>
               </Link>
-              <Link to='/balance' className='info-data-link'>
-                <span className='info-data-top'><b>{this.state.count}</b>个</span>
-                <span className='info-data-bottom'>我的优惠</span>
-              </Link>
-              <Link to='/balance' className='info-data-link'>
-                <span className='info-data-top'><b>{this.state.pointNumber}</b>分</span>
-                <span className='info-data-bottom'>我的积分</span>
-              </Link>
-            </ul>
-          </section>
+            </section>
+            <section className='info-data' key='i1'>
+              <ul className='clear'>
+                <Link to='/balance' className='info-data-link'>
+                  <span className='info-data-top'><b>{parseInt(this.state.balance).toFixed(2)}</b>元</span>
+                  <span className='info-data-bottom'>我的余额</span>
+                </Link>
+                <Link to='/balance' className='info-data-link'>
+                  <span className='info-data-top'><b>{this.state.count}</b>个</span>
+                  <span className='info-data-bottom'>我的优惠</span>
+                </Link>
+                <Link to='/balance' className='info-data-link'>
+                  <span className='info-data-top'><b>{this.state.pointNumber}</b>分</span>
+                  <span className='info-data-bottom'>我的积分</span>
+                </Link>
+              </ul>
+            </section>
           <section className='profile-list'>
-            <Link to='order' className='myorder'>
+          <QueueAnim deley='0.4'>          
+            <Link to='order' className='myorder' key='i2'>
               <div className='icon-dingdan order-icon'></div>
               <div className='myorder-text'>
                 <span>我的订单</span>
                 <div className='icon-arrow-right'></div>
               </div>
             </Link>
-            <a href="https://home.m.duiba.com.cn/#/chome/index" className='myorder'>
+            <a href="https://home.m.duiba.com.cn/#/chome/index" className='myorder' key='i3'>
               <div className='icon-jifen1 order-icon'></div>
               <div className='myorder-text'>
                 <span>积分商城</span>
                 <div className='icon-arrow-right'></div>
               </div>
             </a>
-            <Link to='order' className='myorder'>
+            <Link to='order' className='myorder' key='i4' >
               <div className='icon-huangguan order-icon'></div>
               <div className='myorder-text'>
                 <span>饿了么会员卡</span>
                 <div className='icon-arrow-right'></div>
               </div>
             </Link>
-            <Link to='order' className='myorder'>
+            <Link to='order' className='myorder' key='i5'>
               <div className='icon-yk_fangkuai_fill order-icon'></div>
               <div className='myorder-text'>
                 <span>服务中心</span>
                 <div className='icon-arrow-right'></div>
               </div>
             </Link>
-            <Link to='order' className='myorder'>
+            <Link to='order' className='myorder' key='i6'>
               <div className='icon-changyonglogo40 order-icon'></div>
               <div className='myorder-text'>
                 <span>下载饿了么APP</span>
                 <div className='icon-arrow-right'></div>
               </div>
             </Link>
+        </QueueAnim>
           </section>
         </section>
-        <Footer/>
+        <Footer key='s3'/>
+        </QueueAnim>
+
       </div>
     )
   }
