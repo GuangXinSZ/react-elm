@@ -1,7 +1,7 @@
 import * as user from './action-type'
 
 let defaultState = {
-  username: '00'
+  imgpath: '//elm.cangdu.org/img/1669599be6119829.jpg' //图片地址
 }
 
 // 用户消息
@@ -17,6 +17,8 @@ export const userInfo = (state = defaultState, action = {}) => {
         ...state,
         ...action.imgPath
       }
+    case user.SAVEIMG:
+      return {...state, ...{imgpath: action.path}};
     default:
       return state
   }

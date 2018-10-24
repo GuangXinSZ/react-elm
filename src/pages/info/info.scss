@@ -27,7 +27,6 @@
     .headportrait{
       margin-top: .4rem;
       padding: .5rem .4rem;
-      @include wh(100%, 3.1rem);
       @include flex(space-between);
       border-top: 1px solid #ddd;
       background-color: #fff;
@@ -48,6 +47,48 @@
           color: #ccc;
         }
       }
+    }
+    .headportraitwo{
+      margin-top: 0;
+      padding: .6rem .4rem;
+      font-family:Arial;
+    }
+    .headportraithree{
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding: .6rem .4rem;
+      font-family:Arial;
+    }
+    .bind-phone{
+      padding: .4rem .4rem;
+      @include font(.5rem, #666);
+    }
+    .headportraitfour{
+      padding: .8rem .4rem;
+      border-bottom: 1px solid #ddd;
+      .headport-phone{
+        @include flex;
+        h2{
+          margin-left: .2rem;
+        }
+      }
+    }
+    .headport-modify{
+      @include font(.7rem, #ccc);
+      font-weight: bold;
+    }
+    .exit-login{
+      width: 96%;
+      margin: 1.3rem auto 0;
+      line-height: 1.5rem;
+      border-radius: 5px;
+      background-color: #d8584a;
+      @include font(.6rem, #fff);
+      text-align: center;
+    }
+    .exitlogin:active{
+      opacity:.8;
+      background:#C1C1C1;
     }
   }
 }

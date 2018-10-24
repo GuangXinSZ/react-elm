@@ -5,13 +5,11 @@ import {connect} from 'react-redux'
 import Header from '@/components/header/header'
 import Footer from '@/components/footer/footer'
 import QueueAnim from 'rc-queue-anim'
-import ScrollAnim from 'rc-scroll-anim'
 import {saveAvander, saveUserInfo} from '@/store/user/action'
 import './profile.scss'
 import {getImgPath} from '../../utils/commons'
 import API from '../../api/api'
 
-const ScrollOverPack = ScrollAnim.OverPack;
 class Profile extends Component {
   static propTypes = {
     userInfo: PropTypes.object.isRequired,
