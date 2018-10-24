@@ -19,6 +19,8 @@ export const userInfo = (state = defaultState, action = {}) => {
       }
     case user.SAVEIMG:
       return {...state, ...{imgpath: action.path}};
+    case user.RESET_USERINFO:
+      return {...state, ...{[action.datatype]: action.value}};
     default:
       return state
   }

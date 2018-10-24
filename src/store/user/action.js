@@ -25,3 +25,13 @@ export const saveImg = path => {
     path,
   }
 }
+
+// 修改用户名
+export const resetUserInfo = (datatype, value) => {
+  return {
+    type: user.RESET_USERINFO,
+    datatype,
+    value,
+
+  }
+}

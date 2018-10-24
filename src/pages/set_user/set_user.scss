@@ -45,6 +45,8 @@
   .reset{
     width: 100%;
     background: #3199e8;
+    border-radius: 5px;
+    border:  #3199e8;
     button{
       display: block;
       width: 100%;
@@ -56,7 +58,8 @@
     }
     .fontopacity{
       transition: all 1s;
-      opacity:1;
+      opacity:1!important;
+      font-weight: bold;
     }
   }
 }

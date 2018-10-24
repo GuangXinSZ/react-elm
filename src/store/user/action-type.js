@@ -10,3 +10,6 @@ export const SAVEIMG = 'SAVEIMG';
 
 // 清空数据
 export const CLEARIMG = 'CLEARIMG';
+
+// 修改用户信息
+export const RESET_USERINFO = 'RESET_USERINFO'

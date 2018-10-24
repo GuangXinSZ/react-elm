@@ -1,18 +1,21 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
 import Header from '@/components/header/header'
 import {connect} from 'react-redux'
 import API from '../../api/api'
 import './set_user.scss'
-
+import {resetUserInfo} from '@/store/user/action'
 
 class SetUser extends Component {
   static propTypes = {
-
+    resetUserInfo: PropTypes.func.isRequired,
+    userInfo: PropTypes.object
   }
   state = {
     headerTitle: '',
     type: '',
+    name: '',
     activeInput: '',
     activeText: '',
     fontopacity: ''
@@ -36,15 +39,40 @@ class SetUser extends Component {
       type
     })
   }
-  resetName = () => {
+  handleInput = (e) => {
+    let value = e.target.value 
     this.setState({
-      activeInput: 'active-input',
-      activeText: 'active-text',
-      fontopacity: 'fontopacity'
+      name: value   // 是一个异步的过程, 不要在里面用e.target
     })
+    this.inputValidate()
+  }
+  inputValidate = () => {
+    let name = this.state.name
+    if (name.length < 5 || name.length > 24) {
+      this.setState({
+        activeInput: 'active-input',
+        activeText: 'active-text',
+        fontopacity: ''
+      })
+      return false
+    } else {
+      this.setState({
+        activeInput: '',
+        activeText: '',
+        fontopacity: 'fontopacity'
+      })
+      return true
+    }
+  }
+  resetName = () => {
+    let checkResult = this.inputValidate()
+    if (!checkResult) {
+      return
+    }
+    this.props.resetUserInfo('username', this.state.name)
+    this.props.history.goBack()
   }
   componentWillMount () {
-    console.log(this.props.location, 'mar')
     this.initData()
   }
   render () {
@@ -54,9 +82,10 @@ class SetUser extends Component {
         {
           this.state.type==='name'&&<section className='setname'>
             <section className='setname-top'>
-              <input type="text" placeholder='输入用户名' className={this.state.activeInput}/>
+              <input type="text" placeholder='输入用户名' value={this.state.name} onChange={this.handleInput.bind(this)} className={this.state.activeInput}/>
               <div>
-                <p className={this.state.activeText}>用户只能修改一次(5~24字符之间)</p>
+                {!this.state.activeText?<p>用户只能修改一次(5~24字符之间)</p>:
+                <p className={this.state.activeText}>用户名长度在5到24位之间</p>}
               </div>
             </section>
             <section className='reset'>
@@ -69,4 +98,8 @@ class SetUser extends Component {
   }
 }
 
-export default SetUser
+export default connect(state => ({
+  userInfo: state.userInfo
+}), {
+  resetUserInfo
+})(SetUser)
