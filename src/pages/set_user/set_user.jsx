@@ -7,6 +7,7 @@ import API from '../../api/api'
 import './set_user.scss'
 import Name from './name/name'
 import Address from './address/address'
+import Add from './add/add'
 import {resetUserInfo} from '@/store/user/action'
 
 class SetUser extends Component {
@@ -32,6 +33,9 @@ class SetUser extends Component {
       case 'address':
         headerTitle = '编辑地址'
         break
+      case 'add':
+        headerTitle = '新增地址'
+        break
       default: 
         headerTitle = ''
     }
@@ -54,6 +58,7 @@ class SetUser extends Component {
         <Switch>
           <Route path={`${this.props.match.path}/name`} component={Name} />
           <Route path={`${this.props.match.path}/address`} component={Address} />
+          <Route path={`${this.props.match.path}/add`} component={Add} />
         </Switch>
       </div>
     )

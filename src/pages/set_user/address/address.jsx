@@ -44,7 +44,7 @@ class Address extends Component {
             }
 
           </ul>
-          <Link to='/setuser/address/add'>
+          <Link to='/setuser/add'>
             <div className='addsite'>
               <span>新增地址</span>
               <div className='icon-arrow-right'></div>
