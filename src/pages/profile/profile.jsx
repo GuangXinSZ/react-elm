@@ -6,8 +6,7 @@ import Header from '@/components/header/header'
 import Footer from '@/components/footer/footer'
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import QueueAnim from 'rc-queue-anim'
-import {getStore} from '../../utils/commons'
-import {saveAvander, saveUserInfo} from '@/store/user/action'
+import {saveUserInfo} from '@/store/user/action'
 import './profile.scss'
 import {getImgPath} from '../../utils/commons'
 import API from '../../api/api'
@@ -15,27 +14,21 @@ import API from '../../api/api'
 class Profile extends Component {
   static propTypes = {
     userInfo: PropTypes.object.isRequired,
-    saveAvander: PropTypes.func.isRequired,
     saveUserInfo: PropTypes.func.isRequired,
   }
   state = {
     username: '登录/注册',
-    avatar: '',
     mobile: '暂无绑定手机',
     imgpath: '',
-    imgUrl: '',
     balance: 0,            //我的余额
     count : 0,             //优惠券个数
     pointNumber : 0,       //积分数
   }
   initData  = () => {
-    console.log('init')
     let newState = {}
     if (this.props.userInfo && this.props.userInfo.user_id) {
-      newState.avatar = this.props.userInfo.avatar
       newState.mobile = this.props.userInfo.mobile || '暂无手机绑定'
       newState.username = this.props.userInfo.username
-      newState.imgUrl = '//elm.cangdu.org/img/1669599be6119829.jpg'
       newState.balance = this.props.userInfo.balance
       newState.count = this.props.userInfo.gift_amount
       newState.pointNumber = this.props.userInfo.point
@@ -46,15 +39,11 @@ class Profile extends Component {
     }
     this.setState(newState)
   }
-
   getUserInfo = async () => {
-    console.log(3131)
     let res = await API.getUser()
     this.props.saveUserInfo(res)
-    this.initData()
-    
+    this.initData()  
   }
-
   goBack = () => {
     this.props.history.goBack()
   }
@@ -78,10 +67,6 @@ class Profile extends Component {
     console.log('udapte')
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
   }
-
-  goTo = () => {
-    window.location.href = 'http://www.baidu.com'
-  }
   render () {
     return (
       <div className='profile-container'>
@@ -90,13 +75,13 @@ class Profile extends Component {
         <section  key='s2'>
             <section className='profile-number' >
               <Link to={this.props.userInfo&&this.props.userInfo.user_id?'/info':'/login'} className='profile-link'>
-                <img src={this.state.imgUrl} alt='img is wrong' className='private-image'/>
+                <img src={this.props.userInfo.imgpath} alt='img is wrong' className='private-image'/>
                 <div className='user-info'>
-                  <p>{this.state.username}</p>
-                  <p>
+                  <div>{this.state.username}</div>
+                  <div>
                     <div className='icon-tel'></div>
                     <span className='icon-mobile-number'>{this.state.mobile}</span>
-                  </p>
+                  </div>
                 </div>
                 <div className='icon-arrow-right'>
                 </div>
@@ -160,7 +145,6 @@ class Profile extends Component {
         </section>
         <Footer key='s3'/>
         </QueueAnim>
-
       </div>
     )
   }
@@ -169,5 +153,5 @@ class Profile extends Component {
 export default connect(state => ({
   userInfo: state.userInfo
 }), {
-  saveAvander,saveUserInfo
+  saveUserInfo
 })(Profile)

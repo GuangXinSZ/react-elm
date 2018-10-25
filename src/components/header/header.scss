@@ -6,23 +6,22 @@
   z-index: 101;
   left: 0;
   top: 0;
-  @include flex(space-between, center);
+  font-weight: bold!important;
+  @include flex;
   @include wh(100%, 1.95rem);
 
   .header-back{
-    @include font(22px, #fff);
-    font-weight: bold;
-    margin-left: 5px;
+    @include font(1.3rem, #fff);
+    @include positionLeft;
   }
 
   .header-title{
     @include font(0.8rem, #fff);
     font-family: 'Microsoft YaHei';
-    font-weight: bold;
   }
 
   .user-avatar{
-    @include font(20px, #fff);
-    margin-right: 10px;
+    @include font(0.7rem, #fff);
+    @include positionRight;
   }
 }

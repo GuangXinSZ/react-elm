@@ -6,19 +6,17 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import QueueAnim from 'rc-queue-anim'
 import Header from '@/components/header/header'
-import {saveImg} from '@/store/user/action'
+import {resetUserInfo} from '@/store/user/action'
 import envconfig from '@/config/envconfig';   // 环境变量的配置
 import API from '../../api/api'
 import './info.scss'
 
-
 class Info extends Component {
   static propTypes = {
-    saveImg: PropTypes.func,
+    resetUserInfo: PropTypes.func.isRequired,
     userInfo: PropTypes.object.isRequired
   }
   state = {
-    imgUrl: '//elm.cangdu.org/img/1669599be6119829.jpg',
     hasAlert: false,
   }
     /*
@@ -29,19 +27,16 @@ class Info extends Component {
       let formdata = new FormData();  // 获取表单
       formdata.append('file', event.target.files[0]);  // 上传的文件
       let result = await API.uploadImg({data: formdata});
-      this.props.saveImg(envconfig.imgUrl + result.image_path);
+      this.props.resetUserInfo('imgpath', envconfig.imgUrl + result.image_path)
       console.log(result);
     }catch(err){
       console.error(err);
     }
   }
-
   goBack = () => {
     this.props.history.goBack()
   }
   componentWillMount () {
-    console.log(this.props)
-    console.log(this.state)
   }
   shouldComponentUpdate(nextProps, nextState) {
     return !is(fromJS(this.props), fromJS(nextProps))|| !is(fromJS(this.state),fromJS(nextState))
@@ -51,7 +46,7 @@ class Info extends Component {
       <div className='rating-page'>
         <QueueAnim type='bottom'>
           <Header title="账户消息" goBack={this.goBack} key='o1'/>
-          <section className='profile-info' key=''o2>
+          <section className='profile-info' key='o2'>
           <QueueAnim>
             <section className='headportrait' key='k1'>
               <input type="file" className='profile-info-upload' onChange={this.uploadImg}/>
@@ -65,12 +60,12 @@ class Info extends Component {
               <section className='headportrait headportraitwo'>
                 <h2>用户名</h2>
                 <div className='info-avatar'>
-                  <div>{this.state.username}</div>
+                  <div>{this.props.userInfo.username}</div>
                   <div className='icon-arrow-right'></div>
                 </div>
               </section>
             </Link>
-            <Link to='/info/setusername' className='info-router' key='k3'>
+            <Link to='/setuser/address' className='info-router' key='k3'>
               <section className='headportrait headportraithree'>
                 <h2>收获地址</h2>
                 <div className='info-avatar'>
@@ -79,7 +74,7 @@ class Info extends Component {
                 </div>
               </section>
             </Link>
-            <section class="bind-phone" key='k4'>
+            <section className="bind-phone" key='k4'>
                 账号绑定
             </section>
             <Link to='/info/setusername' className='info-router' key='k5'>
@@ -93,10 +88,10 @@ class Info extends Component {
                 </div>
               </section>
             </Link>
-            <section class="bind-phone" key='k5'>
+            <section className="bind-phone" key='k6'>
                 安全设置
             </section>
-            <Link to='/info/setusername' className='info-router' key='k6'>
+            <Link to='/info/setusername' className='info-router' key='k7'>
               <section className='headportrait headportraithree'>
                 <h2>登录密码</h2>
                 <div className='info-avatar'>
@@ -105,7 +100,7 @@ class Info extends Component {
                 </div>
               </section>
             </Link>
-            <section className='exit-login' key='k7'>退出登录</section>
+            <section className='exit-login' key='k8'>退出登录</section>
              </QueueAnim>
           </section>
       {this.state.hasAlert&&<AlertTip closeTip={this.closeTip} alertText={this.state.alertText}/>}
@@ -118,5 +113,5 @@ class Info extends Component {
 export default connect(state => ({
   userInfo: state.userInfo
 }), {
-  saveImg
+  resetUserInfo
 })(Info)

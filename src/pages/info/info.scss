@@ -37,6 +37,7 @@
       }
       .info-avatar{
         @include flex;
+        @include font(.7rem, #ccc);
         .headport-top{
           @include wh(2rem, 2rem);
           border-radius: 50%;

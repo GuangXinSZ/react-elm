@@ -24,12 +24,15 @@ class SetUser extends Component {
     this.props.history.goBack()
   }
   initData = () => {
+    console.log('11313')
     let type = this.props.location.pathname.split('/')[2]
     let headerTitle
     switch (type){
       case 'name':
-        console.log(2222)
         headerTitle = '修改用户名'
+        break
+      case 'address':
+        headerTitle = '编辑地址'
         break
       default: 
         headerTitle = ''
@@ -72,13 +75,16 @@ class SetUser extends Component {
     this.props.resetUserInfo('username', this.state.name)
     this.props.history.goBack()
   }
+  editAddresss = () => {
+    console.log('131313')
+  }
   componentWillMount () {
     this.initData()
   }
   render () {
     return (
       <div className='rating-page'>
-        <Header title={this.state.headerTitle} goBack={this.goBack}/>
+        <Header title={this.state.headerTitle} goBack={this.goBack} edit={this.state.type==='address'?this.editAddresss: null}/>
         {
           this.state.type==='name'&&<section className='setname'>
             <section className='setname-top'>
@@ -92,6 +98,9 @@ class SetUser extends Component {
               <button className={this.state.fontopacity} onClick={this.resetName}>确认修改</button>
             </section>
           </section>
+        }
+        {
+          this.state.type==='address'&&<section>9124104</section>
         }
       </div>
     )
