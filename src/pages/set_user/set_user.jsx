@@ -72,7 +72,7 @@ class SetUser extends Component {
           <Route path={`${this.props.match.path}/name`} component={Name} />
           <Route path={`${this.props.match.path}/address`} component={Address} />
           <Route path={`${this.props.match.path}/add/:type`} component={Add} />
-          <Route path={`${this.props.match.path}/add_detail/`} component={AddDetail} />
+          <Route path={`${this.props.match.path}/add_detail`} component={AddDetail} />
         </Switch>
       </div>
     )

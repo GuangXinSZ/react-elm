@@ -68,6 +68,26 @@
       border-bottom-left-radius: .25rem;
       border-bottom-right-radius: .25rem;
     }
+    .logout{
+      @include flex(space-between);
+      width: 9rem;
+      margin: 1rem auto;
+      font-family: Helvetica Neue,Tahoma,Arial;
+      div:nth-of-type(1) {
+        @include wh(3.8rem, 1.6rem);
+        line-height: 1.6rem;
+        border-radius: 5px;
+        @include font(0.6rem,#fff, center);
+        background: #aaa;
+      }
+      div:nth-of-type(2) {
+        @include wh(3.8rem, 1.6rem);
+        line-height: 1.6rem;
+        border-radius: 5px;
+        @include font(0.6rem, #fff, center);
+        background: #d8584a;
+      }
+    }
   }
 
 }

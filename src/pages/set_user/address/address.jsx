@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import {resetUserInfo} from '@/store/user/action'
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import {getStore} from '@/utils/commons'
-
 import './address.scss'
 import API from '../../../api/api'
 
@@ -16,7 +15,7 @@ class Address extends Component {
     userInfo: PropTypes.object
   }
   state = {
-    deletesite:false, //是否编辑状态
+    refresh:false, //是否编辑状态
   }
   getAddress = async () =>{
     const res = await API.getAddress( {},getStore('user_id'))
@@ -26,7 +25,7 @@ class Address extends Component {
     let hasAddressList = this.props.userInfo.hasAddressList
     hasAddressList.splice(index, 1)
     this.setState({
-      deletesite: true
+      refresh: !this.state.refresh
     })
     this.props.resetUserInfo('hasAddressList', hasAddressList)
   }

@@ -18,6 +18,8 @@ class Info extends Component {
   }
   state = {
     hasAlert: false,
+    alertText: '请在手机APP中打开',
+    logout: false
   }
     /*
   上传图片，并将图片地址存到redux，保留状态
@@ -33,8 +35,37 @@ class Info extends Component {
       console.error(err);
     }
   }
+
+  handleClick = (type) =>{
+    let alertText
+    let logout = false
+    switch (type){
+      case 'tele':
+        alertText = '请在手机APP中打开'
+        break
+      case 'password':
+        alertText = '功能尚未开发'
+        break
+      case 'logout':
+        alertText = '是否退出登录'
+        logout = true
+        break
+      default:
+    }
+    this.setState({
+      hasAlert: !this.state.hasAlert,
+      alertText,
+      logout
+    })
+  }
   goBack = () => {
     this.props.history.goBack()
+  }
+  logout = (wait) => {
+    if (!wait){
+      this.props.history.push('/login')
+    }
+    return this.state.logout
   }
   componentWillMount () {
   }
@@ -77,7 +108,7 @@ class Info extends Component {
             <section className="bind-phone" key='k4'>
                 账号绑定
             </section>
-            <Link to='/info/setusername' className='info-router' key='k5'>
+            <div onClick={this.handleClick.bind(this, 'tele')} className='info-router' key='k5'>
               <section className='headportrait headportraitfour'>
                 <div className='headport-phone'>
                   <div className='icon-shouji'></div>
@@ -87,11 +118,11 @@ class Info extends Component {
                   <div className='icon-arrow-right'></div>
                 </div>
               </section>
-            </Link>
+            </div>
             <section className="bind-phone" key='k6'>
                 安全设置
             </section>
-            <Link to='/info/setusername' className='info-router' key='k7'>
+            <div onClick={this.handleClick.bind(this, 'password')} className='info-router' key='k7'>
               <section className='headportrait headportraithree'>
                 <h2>登录密码</h2>
                 <div className='info-avatar'>
@@ -99,11 +130,11 @@ class Info extends Component {
                   <div className='icon-arrow-right'></div>
                 </div>
               </section>
-            </Link>
-            <section className='exit-login' key='k8'>退出登录</section>
+            </div>
+            <section onClick={this.handleClick.bind(this, 'logout')} className='exit-login' key='k8'>退出登录</section>
              </QueueAnim>
           </section>
-      {this.state.hasAlert&&<AlertTip closeTip={this.closeTip} alertText={this.state.alertText}/>}
+      {this.state.hasAlert&&<AlertTip logout={this.logout} closeTip={this.handleClick} alertText={this.state.alertText}/>}
       </QueueAnim>
       </div>
     )

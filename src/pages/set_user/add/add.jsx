@@ -46,6 +46,10 @@ class Address extends Component {
     console.log(this.props.location, 'fdf')
     if (this.props.match.params.type === 'fromadd') {
       this.props.resetUserInfo('addressName', '')
+    } else {
+      this.setState({
+        message: this.props.userInfo.temMessage
+      })
     }
     // if (this.props.location)
   }
@@ -113,6 +117,9 @@ class Address extends Component {
     })
     this.bindThing()
   }
+  saveMessage = () => {
+    this.props.resetUserInfo('temMessage', this.state.message)
+  }
 
   handleInput = (type, e) => {
     let newState = {}
@@ -148,7 +155,7 @@ class Address extends Component {
                   <input type="text" placeholder='请输入你的姓名' className={this.state.vertifies} value={this.state.message} onChange={this.handleInput.bind(this, 'message')}/>
                   {this.state.verify&&<p>请输入您的姓名</p>}
                 </div>
-                <Link to='/setuser/add_detail' className='add-detail'>
+                <Link to='/setuser/add_detail' onClick={this.saveMessage} className='add-detail'>
                   <div className='input-new'>
                     <input type="text" placeholder='小区/写字楼/学校等' readOnly='readonly' value={this.props.userInfo.addressName} />
                   </div>
