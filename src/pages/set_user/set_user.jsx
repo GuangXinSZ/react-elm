@@ -4,10 +4,12 @@ import PropTypes from 'prop-types'
 import Header from '@/components/header/header'
 import {connect} from 'react-redux'
 import API from '../../api/api'
+import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import './set_user.scss'
 import Name from './name/name'
 import Address from './address/address'
 import Add from './add/add'
+import AddDetail from './add_detail/add_detail'
 import {resetUserInfo} from '@/store/user/action'
 
 class SetUser extends Component {
@@ -23,8 +25,8 @@ class SetUser extends Component {
   goBack = () => {
     this.props.history.goBack()
   }
-  initData = () => {
-    let type = this.props.location.pathname.split('/')[2]
+  initData = (props) => {
+    let type = props.location.pathname.split('/')[2]
     let headerTitle
     switch (type){
       case 'name':
@@ -36,6 +38,9 @@ class SetUser extends Component {
       case 'add':
         headerTitle = '新增地址'
         break
+      case 'add_detail':
+        headerTitle = '搜索地址'
+        break
       default: 
         headerTitle = ''
     }
@@ -45,10 +50,18 @@ class SetUser extends Component {
     })
   }
   editAddresss = () => {
-    console.log('131313')
+    this.props.resetUserInfo('operate', 'delete')
   }
   componentWillMount () {
-    this.initData()
+    this.initData(this.props)
+  }
+  componentWillReceiveProps(nextProps){  // 属性props改变时候触发
+    if(!is(fromJS(this.props.location.pathname), fromJS(nextProps.location.pathname))){   //
+      this.initData(nextProps);
+    }
+  }
+  shouldComponentUpdate(nextProps, nextState) {   // 判断是否要更新render, return true 更新  return false不更新
+    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
   }
   render () {
     return (
@@ -58,7 +71,8 @@ class SetUser extends Component {
         <Switch>
           <Route path={`${this.props.match.path}/name`} component={Name} />
           <Route path={`${this.props.match.path}/address`} component={Address} />
-          <Route path={`${this.props.match.path}/add`} component={Add} />
+          <Route path={`${this.props.match.path}/add/:type`} component={Add} />
+          <Route path={`${this.props.match.path}/add_detail/`} component={AddDetail} />
         </Switch>
       </div>
     )

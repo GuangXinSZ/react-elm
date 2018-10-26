@@ -125,6 +125,25 @@ class API extends Server{
     }
   }
 
+  async searchPois(params = {}, keyword){
+    try{
+      let result = await this.axios('get', '/v1/pois/?type=nearby&keyword=' + keyword, params); 
+      if(result){
+        return result;
+      }else{
+        let err = {
+          tip: '获取附件失败',
+          response: result,
+          data: params,
+          url: '//elm.cangdu.org/v1/carts/addresses',
+        }
+        throw err;
+      }
+    }catch(err){
+      throw err;
+    }
+  }
+
 }
 
 export default new API()
