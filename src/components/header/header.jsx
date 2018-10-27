@@ -37,7 +37,7 @@ class Header extends Component {
         {this.props.signUp?(this.state.userInfo ? <span className='icon-account user-avatar'></span>
         : <span>登录|注册</span>):''}
         {this.props.edit&&<div onClick={this.handleEdit} className='user-avatar'>
-        {this.props.userInfo==='edit'?'编辑':'完成'}</div>}
+        {this.props.userInfo.operate==='edit'?'编辑':'完成'}</div>}
       </header>
     )
   }

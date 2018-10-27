@@ -14,7 +14,7 @@ export default class RouteConfig extends Component {
     return (
       <HashRouter>
         <Switch>
-          <Route path="/profile"  component= {profile}/>
+          <Route path="/"  component= {profile}/>
           <Route path="/login" exact component= {login}/>
           <Route path="/info"  component= {info}/>
           <Route path="/setuser"  component= {setUser}/>

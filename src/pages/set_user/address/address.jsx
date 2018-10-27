@@ -49,7 +49,7 @@ class Address extends Component {
                   <p>{item.address}</p>
                   <p><span>{item.telenum}</span>{item.standbytelenum&&<span>,{item.standbytelenum}</span>}</p>
                 </div>
-                {this.props.userInfo.operate === 'edit'&&<div className='deletesite'>
+                {this.props.userInfo.operate === 'success'&&<div className='deletesite'>
                   <span onClick={this.handleDelete.bind(this, index)}>x</span>
                 </div>}
                 </li>

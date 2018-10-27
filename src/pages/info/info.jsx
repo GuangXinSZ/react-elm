@@ -59,7 +59,7 @@ class Info extends Component {
     })
   }
   goBack = () => {
-    this.props.history.goBack()
+    this.props.history.push('/')
   }
   logout = (wait) => {
     if (!wait){

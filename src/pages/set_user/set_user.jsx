@@ -58,7 +58,8 @@ class SetUser extends Component {
     })
   }
   editAddresss = () => {
-    this.props.resetUserInfo('operate', 'edit')
+    let operate = this.props.userInfo.operate === 'edit'?'success':'edit'
+    this.props.resetUserInfo('operate', operate)
   }
   componentWillMount () {
     this.initData(this.props)

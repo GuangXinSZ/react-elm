@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import './alert_tip.scss'
 
-
 class AlertTip extends Component {
   static propTypes = {
     alertText: PropTypes.string.isRequired,
