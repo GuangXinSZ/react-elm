@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import API from '../../api/api'
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import './set_user.scss'
+import QueueAnim from 'rc-queue-anim'
 import Name from './name/name'
 import Address from './address/address'
 import Add from './add/add'
@@ -23,7 +24,14 @@ class SetUser extends Component {
     name: '',
   }
   goBack = () => {
-    this.props.history.goBack()
+    let path = this.props.location.pathname.split('/')[2]
+    if (path=== 'add') {
+      this.props.history.push('/setuser/address')
+    } else if (path === 'address') {
+      this.props.history.push('/info')
+    } else {
+      this.props.history.goBack()
+    }
   }
   initData = (props) => {
     let type = props.location.pathname.split('/')[2]
@@ -50,7 +58,7 @@ class SetUser extends Component {
     })
   }
   editAddresss = () => {
-    this.props.resetUserInfo('operate', 'delete')
+    this.props.resetUserInfo('operate', 'edit')
   }
   componentWillMount () {
     this.initData(this.props)
@@ -66,14 +74,16 @@ class SetUser extends Component {
   render () {
     return (
       <div className='rating-page'>
-        <Header title={this.state.headerTitle} goBack={this.goBack} edit={this.state.type==='address'?this.editAddresss: null}/>
+      <QueueAnim type='bottom'>
+        <Header title={this.state.headerTitle} goBack={this.goBack} edit={this.state.type==='address'?this.editAddresss: null} key='o1'/>
         {/* 子路由在父级配置，react-router4新特性，更加灵活 */}
-        <Switch>
+        <Switch key='o2'>
           <Route path={`${this.props.match.path}/name`} component={Name} />
           <Route path={`${this.props.match.path}/address`} component={Address} />
           <Route path={`${this.props.match.path}/add/:type`} component={Add} />
           <Route path={`${this.props.match.path}/add_detail`} component={AddDetail} />
         </Switch>
+        </QueueAnim>
       </div>
     )
   }

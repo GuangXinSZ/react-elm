@@ -30,7 +30,8 @@
 }
 
 .point{
-  @include positionCenter;
+  position: absolute;
+  top: 10rem;
   width: 100%;
   p{
     font-weight: 600;

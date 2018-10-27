@@ -93,6 +93,9 @@ class Login extends Component {
       captchaCodeImg: res.code
     })
   }
+  goBack = () => {
+    this.props.history.goBack()
+  }
   componentWillMount () {
     console.log(this.props, 'rpops')
     this.getCaptchaCode()
@@ -101,7 +104,7 @@ class Login extends Component {
     return (
       <Animate transitionName='fade'>
     <div className="login-container">
-        <Header title="密码登录" goBack={true} />
+        <Header title="密码登录" goBack={this.goBack}  />
         {this.state.loginWay?<form className="login-form">
           <section className="input-container phone-number">
             <input type="text" placeholder="账户密码随便输入" name="phone" maxLength="11" value={this.state.mobileCode} />

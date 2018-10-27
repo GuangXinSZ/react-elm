@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {resetUserInfo} from '@/store/user/action'
 import {getStore} from '@/utils/commons'
+import QueueAnim from 'rc-queue-anim'
 import './add.scss'
 import API from '../../../api/api'
 
@@ -151,27 +152,29 @@ class Address extends Component {
       <div className='adddetail'>
           <form className='add-form'>
               <section className='ui-padding-block'>
-                <div className='input-new'>
+                <QueueAnim >
+                <div className='input-new' key='o1'>
                   <input type="text" placeholder='请输入你的姓名' className={this.state.vertifies} value={this.state.message} onChange={this.handleInput.bind(this, 'message')}/>
                   {this.state.verify&&<p>请输入您的姓名</p>}
                 </div>
-                <Link to='/setuser/add_detail' onClick={this.saveMessage} className='add-detail'>
+                <Link to='/setuser/add_detail' onClick={this.saveMessage} className='add-detail' key='o2'>
                   <div className='input-new'>
                     <input type="text" placeholder='小区/写字楼/学校等' readOnly='readonly' value={this.props.userInfo.addressName} />
                   </div>
                 </Link>
-                <div className='input-new'>
+                <div className='input-new' key='o3'>
                   <input type="text" placeholder='请填写详细送餐地址' className={this.state.vertifies} value={this.state.mesthree} onChange={this.handleInput.bind(this, 'mesthree')}/>
                   {this.state.verifythree&&<p>{this.state.sendaddress}</p>}
                 </div>
-                <div className='input-new'>
+                <div className='input-new' key='o4'>
                   <input type="text" placeholder='请填写能够联系到您的手机号' className={this.state.vertifies} value={this.state.telenum} onChange={this.handleInput.bind(this, 'telenum')}/>
                   {this.state.verifyfour&&<p>{this.state.telephone}</p>}
                 </div>
-                <div className='input-new'>
+                <div className='input-new' key='o6'>
                   <input type="text" placeholder='备用联系电话（选填）' className={this.state.vertifies} value={this.state.standbytelenum} onChange={this.handleInput.bind(this, 'standbytelenum')}/>
                   {this.state.verifyfive&&<p>{this.state.standbytele}</p>}
                 </div>
+                </QueueAnim>
               </section>
               <section className='addbutton'>
                 <button className={this.state.butopacity} onClick={this.handleAdd}>新增地址</button>

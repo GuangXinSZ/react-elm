@@ -6,7 +6,7 @@ let defaultState = {
   addressName: '',  // 选中的地址
   temMessage: '', //临时姓名
   hasAddressList: [], // 已有的地址
-  operate: '',
+  operate: 'edit',
   temAddress: {
     message: ''
   },  //临时数据
