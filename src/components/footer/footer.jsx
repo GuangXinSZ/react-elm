@@ -14,7 +14,7 @@ class Footer extends Component {
   render () {
     return (
       <section className='footer-container'>
-        <NavLink className='guide-item' to='profile1'>
+        <NavLink className='guide-item' to='/msite'>
           <div className='icon-changyonglogo40 icon-style'></div>
           <span className='spec-text'>外卖</span>
         </NavLink>

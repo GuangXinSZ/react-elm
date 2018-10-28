@@ -6,6 +6,7 @@ const login = asyncComponent(() => import("@/pages/login/login"))
 const profile = asyncComponent(() => import("@/pages/profile/profile"))
 const info = asyncComponent(() => import("@/pages/info/info"))
 const setUser = asyncComponent(() => import("@/pages/set_user/set_user"))
+const msite = asyncComponent(() => import("@/pages/msite/msite"))
 
 
 export default class RouteConfig extends Component {
@@ -14,9 +15,10 @@ export default class RouteConfig extends Component {
     return (
       <HashRouter>
         <Switch>
-          <Route path="/"  component= {profile}/>
+          <Route path="/" exact  component= {profile}/>
           <Route path="/login" exact component= {login}/>
           <Route path="/info"  component= {info}/>
+          <Route path="/msite"  component= {msite}/>
           <Route path="/setuser"  component= {setUser}/>
           <Route component= {profile}/>
         </Switch>
