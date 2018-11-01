@@ -28,16 +28,43 @@
   padding-top: 2.1rem;
   background-color: #fff;
   border-bottom: 0.025rem solid #ddd;
+  .swiper-container{
+    @include wh(100%, auto);
+    padding-bottom: 0.6rem;
+    .swiper-pagination{
+      bottom: 0.2rem;
+    }
+  }
   .food-types-container{
     width: 100%;
     padding-bottom: 0.6rem;
-    @include flex(space-around);
+    @include flex;
     flex-wrap: wrap;
     .food-item{
-      @include wh(3.6rem, 3.6rem);
+      @include wh(4rem, 3.2rem);
       margin-top: .6rem;
-      border-radius: 3px;
-      background-color: #C0C4CC;
+      padding: 0.4rem;
+      .food-item-inner{
+        background-color: #C0C4CC;
+        @include wh(100%, 100%);
+        border-radius: 3px;
+      }
+    }
+    .link-to-food{
+      width: 25%;
+      padding: 0.3rem 0rem;
+      @include flex;
+      figure{
+        @include flex;
+        flex-direction: column;
+        img{
+          margin-top: 0.3rem;
+          @include wh(1.8rem, 1.8rem)
+        }
+        figcaption{
+          @include font(0.55rem, #666);
+        }
+      }
     }
     
   }
@@ -94,3 +121,4 @@
     }
   }
 }
+

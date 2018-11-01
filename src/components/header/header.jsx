@@ -20,7 +20,6 @@ class Header extends Component {
     headTitle: '首页'
   }
   handleBack = () => {
-    console.log(this.props.history)
     this.props.goBack()
   }
   handleEdit = () => {
@@ -34,7 +33,7 @@ class Header extends Component {
       <header className="header-container">
         {this.props.goBack&&<div className="icon-back header-back" onClick={this.handleBack}></div>}
         <div className="header-title">{this.props.title}</div>
-        {this.props.signUp?(this.state.userInfo ? <span className='icon-account user-avatar'></span>
+        {this.props.signUp?(this.props.userInfo ? <span className='icon-account user-avatar'></span>
         : <span>登录|注册</span>):''}
         {this.props.edit&&<div onClick={this.handleEdit} className='user-avatar'>
         {this.props.userInfo.operate==='edit'?'编辑':'完成'}</div>}

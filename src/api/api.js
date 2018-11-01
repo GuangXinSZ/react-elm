@@ -125,9 +125,86 @@ class API extends Server{
     }
   }
 
-  async searchPois(params = {}, keyword){
+  async searchPois(params = {}, data){
     try{
-      let result = await this.axios('get', '/v1/pois/?type=nearby&keyword=' + keyword, params); 
+      let result = await this.axios('get', '/v1/pois/' + getUrlConcat(data), params); 
+      if(result){
+        return result;
+      }else{
+        let err = {
+          tip: '获取附件失败',
+          response: result,
+          data: params,
+          url: '//elm.cangdu.org/v1/carts/addresses',
+        }
+        throw err;
+      }
+    }catch(err){
+      throw err;
+    }
+  }
+
+
+  async getPoisSite(params = {}, data){
+    try{
+      let result = await this.axios('get', '/v2/pois/' + data, params); 
+      if(result){
+        return result;
+      }else{
+        let err = {
+          tip: '获取附件失败',
+          response: result,
+          data: params,
+          url: '//elm.cangdu.org/v1/carts/addresses',
+        }
+        throw err;
+      }
+    }catch(err){
+      throw err;
+    }
+  }
+
+  async getFootTypes(params = {}, data){
+    try{
+      let result = await this.axios('get', '/v2/index_entry/' + getUrlConcat(data), params); 
+      if(result){
+        return result;
+      }else{
+        let err = {
+          tip: '获取附件失败',
+          response: result,
+          data: params,
+          url: '//elm.cangdu.org/v1/carts/addresses',
+        }
+        throw err;
+      }
+    }catch(err){
+      throw err;
+    }
+  }
+
+  async cityGuess(params = {}, keyword){
+    try{
+      let result = await this.axios('get', '/v1/cities/?type=guess', params); 
+      if(result){
+        return result;
+      }else{
+        let err = {
+          tip: '获取附件失败',
+          response: result,
+          data: params,
+          url: '//elm.cangdu.org/v1/carts/addresses',
+        }
+        throw err;
+      }
+    }catch(err){
+      throw err;
+    }
+  }
+
+  async getShopList(params = {}, data){
+    try{
+      let result = await this.axios('get', '/shopping/restaurants/' + getUrlConcat(data), params); 
       if(result){
         return result;
       }else{

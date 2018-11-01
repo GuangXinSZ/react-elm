@@ -19,7 +19,11 @@ class Address extends Component {
     isShow: true
   }
   handleSearch = async () => {
-    let res = await API.searchPois({}, this.state.inputAddress)
+    let obj = {
+      type: 'nearby',
+      keyword: this.state.inputAddress
+    }
+    let res = await API.searchPois({}, obj)
     this.props.resetUserInfo('addressList', res)
   }
   handleChange = (e) => {

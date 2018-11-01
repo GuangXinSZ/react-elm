@@ -142,6 +142,7 @@ class Login extends Component {
       <p className='login-tips'>
         注册过的用户可凭证账号密码登录
       </p>
+
       <div className='login-button' onClick={this.mobileLogin}>登录</div>
       <Link to='/forget' className='to-forget'>重置密码?</Link>
       {this.state.hasAlert&&<AlertTip closeTip={this.closeTip} alertText={this.state.alertText}/>}

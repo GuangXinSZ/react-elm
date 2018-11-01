@@ -8,6 +8,8 @@ import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import QueueAnim from 'rc-queue-anim'
 import {saveUserInfo} from '@/store/user/action'
 import './profile.scss'
+import Swiper from 'swiper/dist/js/swiper.js'
+import 'swiper/dist/css/swiper.css'
 import {getImgPath} from '../../utils/commons'
 import API from '../../api/api'
 
@@ -55,9 +57,7 @@ class Profile extends Component {
     }
     this.getUserInfo()
   }
-
   componentWillReceiveProps(nextProps){  // 属性props改变时候触发
-    console.log('recu')
     if(!is(fromJS(this.props.proData), fromJS(nextProps.proData))){   //
       this.initData(nextProps);
     }
