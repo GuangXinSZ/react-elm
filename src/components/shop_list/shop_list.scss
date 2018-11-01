@@ -2,6 +2,8 @@
 @import '../../assets/iconfont/iconfont.css';
 .shoplist-container{
   margin-bottom: 3rem;
+  transition:all 1s;
+  animation:bounceIn .6s;
 }
 .shop-item{
   padding: 0.7rem 0.3rem;
@@ -91,5 +93,38 @@
     .order-badge{
       margin-right: -0.5rem;
     }
+  }
+}
+
+
+@keyframes bounceIn{
+  from, 50%, 100% {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100%{
+    opacity: 1.0;
+  }
+}
+
+@keyframes zoomOut{
+  from, 50%, 100% {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0%{
+    opacity: 1.0;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100%{
+    opacity: 0;
   }
 }

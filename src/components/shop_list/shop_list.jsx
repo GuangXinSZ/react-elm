@@ -26,6 +26,9 @@ class ShopList extends Component {
     })
   }
   componentWillMount () {
+    if (this.props.geohash.length) {
+      this.getShopList(this.props)
+    }
   }
   shouldComponentUpdate(nextProps, nextState) {   // 判断是否要更新render, return true 更新  return false不更新
     let refresh = !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))

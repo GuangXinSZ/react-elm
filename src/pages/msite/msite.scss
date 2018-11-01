@@ -24,6 +24,38 @@
   }
 }
 
+@keyframes bounceIn{
+  from, 50%, 100% {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100%{
+    opacity: 1.0;
+  }
+}
+
+@keyframes zoomOut{
+  from, 50%, 100% {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0%{
+    opacity: 1.0;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
 .msite-nav{
   padding-top: 2.1rem;
   background-color: #fff;
@@ -34,6 +66,10 @@
     .swiper-pagination{
       bottom: 0.2rem;
     }
+  }
+  .swiper-slide{
+    transition:all 1s;
+    animation:bounceIn .6s;
   }
   .food-types-container{
     width: 100%;
@@ -89,6 +125,8 @@
   .skeleton{
     background-color: #fff;
     margin-bottom: 2rem;
+    transition:all 1s;
+    animation:bounceIn .6s;
     .shop-li{
       display: flex;
       border-bottom: 0.025rem solid #f1f1f1;
@@ -106,7 +144,7 @@
         height: 3.0rem;
         div{
           background-color: #C0C4CC;
-          height: 0.8rem;
+          height: 0.6rem;
           animation: progress1 1.5s infinite alternate;
         }
         div:nth-child(2){
@@ -120,5 +158,10 @@
       }
     }
   }
+}
+
+.site-loader{
+  @include positionCenter(fixed);
+  z-index: 101;
 }
 

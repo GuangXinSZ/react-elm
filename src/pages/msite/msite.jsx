@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Header from "@/components/header/header";
 import "./msite.scss";
 import Footer from '@/components/footer/footer'
+import Loader from '@/components/loader/loader'
 import ShopList from '@/components/shop_list/shop_list'
 import API from "../../api/api";
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
@@ -45,7 +46,6 @@ class Msite extends Component {
     this.setState({
       title: res.name
     })
-    console.log(2411111)
   }
   cityGuess = async () => {
     let res = await API.cityGuess();
@@ -54,13 +54,15 @@ class Msite extends Component {
     });
     this.getPoisSite([res.latitude, res.longitude])
     this.getFootTypes();
-  };
+  }
+  goHome = () => {
+    this.props.history.push('/')
+  }
   componentWillMount() {
-    this.cityGuess();
+    setTimeout(this.cityGuess, 2000)
   }
   shouldComponentUpdate(nextProps, nextState) {   // 判断是否要更新render, return true 更新  return false不更新
     let refresh = !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
-    console.log(refresh)
     if (refresh) {
     }
     return refresh
@@ -68,7 +70,7 @@ class Msite extends Component {
   render() {
     return (
       <div>
-        <Header title={this.state.title} signUp={true}/>
+        <Header title={this.state.title} signUp={true} goHome={this.goHome}/>
         <nav className="msite-nav">
           <div className="swiper-container">
             <div className="swiper-wrapper">
@@ -111,8 +113,8 @@ class Msite extends Component {
             <div className="icon-shangdian" />
             <span className="shop-header-title">附近商家</span>
           </header>
-          <ShopList geohash={this.state.geohash}/>
-          {!this.state.footTypes.length&&<div className="skeleton">
+          {this.state.footTypes.length?<ShopList geohash={this.state.geohash}/>:
+            <div className="skeleton">
             <ul>
               {[1, 2, 3, 4].map((item, index) => {
                 return (
@@ -129,6 +131,9 @@ class Msite extends Component {
             </ul>
           </div>}
         </div>
+        {!this.state.footTypes.length?<div className='site-loader'>
+          <Loader/>
+        </div>:''}
         <Footer/>
       </div>
     );
