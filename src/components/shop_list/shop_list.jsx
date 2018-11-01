@@ -51,7 +51,7 @@ class ShopList extends Component {
           {
             this.state.shopListArr.map((item, index) => {
               return (
-              <Link to={'shop'} className='shop-item' key={'l' + index}>
+              <Link to={'/shop/' + item.id} className='shop-item' key={'l' + index}>
                   <img src={config.imgUrl + item.image_path} alt=""/>
                 <div className='shop-content'>
                   <div className='shop-content-title'>

@@ -1,0 +1,61 @@
+@import '../../assets/iconfont/iconfont.css';
+@import '../../style/mixin.scss';
+
+
+.icon-back{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 11;
+  font-weight: bold;
+  @include font(1.4rem, #fff);
+}
+  .shop-detail-header{
+    overflow: hidden;
+    position: relative;
+    .header-cover-img{
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9;
+      filter: blur(10px);
+    }
+    .description-header{
+      position: relative;
+      z-index: 10;
+      background-color: rgba(119, 103, 137, .43);
+      padding: 0.4rem 0 0.4rem 0.4rem;
+      width: 100%;
+      overflow: hidden;
+      .description-top{
+        display: flex;
+        .description-left{
+          margin-left: 0.3rem;
+          img{
+            @include wh(2.9rem, 2.9rem);
+            display: block;
+            border-radius: 0.15rem;
+          }
+        }
+        .description-right{
+          flex: 1;
+          .description-title{
+            @include font(.8rem, #fff);
+            font-weight: bold;
+            width: 100%;
+            margin-bottom: 0.3rem;
+          }
+          .description-text{
+            @include font(.5rem, #fff);
+            margin-bottom: 0.3rem;
+          }
+          .description-promotion{
+            @include font(.5rem, #fff);
+            width: 11.5rem;
+          }
+        }
+      }
+    }
+  }

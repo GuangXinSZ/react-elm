@@ -10,8 +10,14 @@ import API from "../../api/api";
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import Swiper from "swiper/dist/js/swiper.js";
 import "swiper/dist/css/swiper.css";
+import {resetUserInfo} from '@/store/user/action'
+import PropTypes from 'prop-types'
+
 class Msite extends Component {
-  static propTypes = {};
+  static propTypes = {
+    resetUserInfo: PropTypes.func.isRequired,
+    userInfo: PropTypes.object
+  };
   state = {
     geohash: [],
     footTypes: [],
@@ -52,6 +58,7 @@ class Msite extends Component {
     this.setState({
       geohash: [res.latitude, res.longitude]
     });
+    this.props.resetUserInfo('geohash', [res.latitude, res.longitude])
     this.getPoisSite([res.latitude, res.longitude])
     this.getFootTypes();
   }
@@ -140,4 +147,9 @@ class Msite extends Component {
   }
 }
 
-export default Msite;
+
+export default connect(state => ({
+  userInfo: state.userInfo
+}), {
+  resetUserInfo,
+})(Msite)

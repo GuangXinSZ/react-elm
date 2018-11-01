@@ -10,6 +10,7 @@ let defaultState = {
   temAddress: {
     message: ''
   },  //临时数据
+  geohash: []
 }
 
 // 用户消息
