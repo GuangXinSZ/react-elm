@@ -240,6 +240,25 @@ class API extends Server{
     }
   }
 
+  async getfoodMenu(params = {}, data){
+    try{
+      let result = await this.axios('get', '/shopping/v2/menu/' + getUrlConcat(data), params); 
+      if(result){
+        return result;
+      }else{
+        let err = {
+          tip: '获取附件失败',
+          response: result,
+          data: params,
+          url: '//elm.cangdu.org/v1/carts/addresses',
+        }
+        throw err;
+      }
+    }catch(err){
+      throw err;
+    }
+  }
+
 }
 
 export default new API()

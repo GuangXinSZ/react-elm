@@ -22,7 +22,7 @@ class ShopList extends Component {
     }
     const shopListArr = await API.getShopList({}, obj)
     this.setState({
-      shopListArr
+      shopListArr: shopListArr.slice(1)
     })
   }
   componentWillMount () {

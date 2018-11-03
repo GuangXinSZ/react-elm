@@ -34,6 +34,14 @@ $common-right: 0.6rem;
   transform: translate3d(-50%, -50%, 0);
 }
 
+
+// 默认按照父元素的剧中
+@mixin positionHCenter($position: absolute) {
+  position: $position;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+}
+
 @mixin positionLeft($position: absolute, $left: $common-left) {
   position: $position;
   top: 50%;
