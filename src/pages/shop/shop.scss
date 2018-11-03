@@ -377,6 +377,68 @@
       animation: active .5s ease-in-out;
     }
   }
+  .cart-food-list{
+    position: fixed;
+    width: 100%;
+    padding-bottom: 2rem;
+    z-index:12;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    header{
+      @include flex(space-between);
+      padding: .3rem .6rem;
+      background-color: #eceff1;
+      h4{
+        @include font(.7rem, #666);
+      }
+      .cart-food-clear{
+        @include flex;
+        @include font(.6rem, #666);
+      }
+    }
+    .cart-food-details{
+      background-color:#fff;
+      max-height: 20rem;
+      overflow-y: auto;
+      .cart-food-li{
+        @include flex(space-between);
+        padding: .6rem .5rem;
+        .cart-list-num{
+          width: 55%;
+          p:nth-of-type(1){
+            @include font(.7rem, #666);
+            font-weight: bold;
+          }
+          p:nth-of-type(2){
+            @include font(.4rem, #666);
+          }
+        }
+        .cart-list-price{
+          font-size: 0;
+          span:nth-of-type(1){
+            @include font(.6rem, #f60);
+            font-family: Helvetica Neue,Tahoma;
+          }
+          span:nth-of-type(2){
+            @include font(.7rem, #f60);
+            font-weight: bold;
+            font-family: Helvetica Neue,Tahoma;
+          }
+        }
+        .cart-list-control{
+          @include flex;
+          div{
+            padding: 0 0.15rem;
+            color: #3190e8;
+          }
+          div:nth-of-type(2){
+            @include font(.7rem, #555);
+          }
+        }
+      }
+    }
+  }
   .shop-enter{
     opacity: 0;
   }
@@ -391,6 +453,23 @@
   .shop-leave.shop-leave-active{
     transition: all 300ms;
     opacity: 0;
+  }
+
+
+  .cart-enter{
+    transform: scale(0.1) translateY(.5rem);
+  }
+  .cart-enter.cart-enter-active{
+    transform: scale(1.0) translateY(1.5rem);
+    transition: all .5s ease;
+  }
+  
+  .cart-leave{
+    transform: scale(1.0) translateY(1.5rem);
+  }
+  .cart-leave.cart-leave-active{
+    transition: all 0.5s ease;
+    transform: scale(0.2);
   }
 
   .test{

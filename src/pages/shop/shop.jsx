@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "./shop.scss";
 import PropTypes from "prop-types";
-import { is, fromJS } from 'immutable';  // 保证数据的不可变
+import { is, fromJS, toJS  } from 'immutable';  // 保证数据的不可变
 import config from "@/config/envconfig";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import API from "@/api/api";
@@ -21,12 +21,18 @@ class Shop extends Component {
     miniMoney: 0,
     active: 'food',
     activeIndex: 0,
+    initList: [],
+    isShowCart: false,
     totalPrice: 0,
     foodList: [],
     animate: 'cart-icon-container active-icon',
     displayList: [],
   };
   FirstChild = props => {
+    const childrenArray = React.Children.toArray(props.children);
+    return childrenArray[0] || null;
+  }
+  CartFirstChild = props => {
     const childrenArray = React.Children.toArray(props.children);
     return childrenArray[0] || null;
   }
@@ -66,6 +72,14 @@ class Shop extends Component {
       miniMoney: this.state.shopDetailData.float_minimum_order_amount - totalPrice
     })
   }
+  clearCart = () => {
+    this.setState({
+      foodList: fromJS(this.state.initList).toJS(),
+      totalPrice: 0,
+      count: 0,
+      isShowCart: false
+    })
+  }
   initData = async id => {
     let obj = {
       latitude: this.props.userInfo.geohash[0],
@@ -81,6 +95,7 @@ class Shop extends Component {
       shopId: id,
       show: !this.state.show,
       menuList: menu,
+      initList: fromJS(foodList).toJS(),
       foodList,
       displayList: menu[0].foods,
       count: 0
@@ -103,6 +118,11 @@ class Shop extends Component {
       this.setState({
         animate: 'cart-icon-container active-icon',
       })}, 200)
+  }
+  handleShowCart = () => {
+    this.setState({
+      isShowCart: !this.state.isShowCart
+    })
   }
   changeShowType = (type) => {
     this.setState({
@@ -271,7 +291,7 @@ class Shop extends Component {
                 </div>
                 <div className="buy-cart-container">
                   <div className='cart-icon-num'>
-                    <div className={this.state.count===0?"cart-icon-container":this.state.animate}>
+                    <div onClick={this.handleShowCart} className={this.state.count===0?"cart-icon-container":this.state.animate}>
                       <span className='cart-list-length'>{this.state.count}</span>
                       <div className='icon-ziyuan'></div>
                     </div>
@@ -285,6 +305,47 @@ class Shop extends Component {
                       :<div className='gotopay-button-style'>去结算</div>}
                   </div>
                 </div>
+                <ReactCSSTransitionGroup
+                  component={this.CartFirstChild}
+                  transitionName="cart"
+                  transitionEnterTimeout={600}
+                  transitionLeaveTimeout={300}>
+                    {this.state.isShowCart&&<div className='cart-food-list'>
+                      <header>
+                        <h4>购物车</h4>
+                        <div className='cart-food-clear' onClick={this.clearCart}>
+                          <div className='icon-shanchu'></div>
+                          <div>清空</div>
+                        </div>
+                      </header>
+                      <div className='cart-food-details'>
+                          <ul>
+                            {this.state.foodList.map((cart, index) => {
+                              return cart.qty===0?'':
+                                (
+                                  <li className='cart-food-li'>
+                                    <div className='cart-list-num'>
+                                      <p>{cart.name}</p>
+                                      <p>{cart.specs}</p>
+                                    </div>
+                                    <div className='cart-list-price'>
+                                      <span>¥</span>
+                                      <span>{cart.specfoods[0].price}</span>
+                                    </div>
+                                    <div className='cart-list-control'>
+                                        <div className='icon-wuuiconsuoxiao' onClick={this.handleAddFoodCount.bind(this, cart.num, -1)}></div>
+                                        <div >{cart.qty}</div>
+                                        <div className='icon-wuuiconxiangjifangda' onClick={this.handleAddFoodCount.bind(this, cart.num, 1)}></div>
+                                    </div>
+                                  </li>
+                                )
+                            })}
+                          </ul>
+                      </div>
+                    </div>
+                    }
+                </ReactCSSTransitionGroup>
+
                </div>}
       </ReactCSSTransitionGroup>
       </div>
