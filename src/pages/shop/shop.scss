@@ -1,6 +1,21 @@
 @import '../../assets/iconfont/iconfont.css';
 @import '../../style/mixin.scss';
 
+@keyframes active{
+    from, 50%, 100% {
+      -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+      animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+    0%{
+      transform: scale(1);
+    }
+    50%{
+      transform: scale(1.2);
+    }
+    100%{
+      transform: scale(1);
+    }
+}
 
 .icon-back{
   position: fixed;
@@ -142,7 +157,6 @@
       .menu-left-li{
         padding: .7rem .3rem;
         border-bottom: 0.025rem solid #ededed;
-        // box
         img{
           @include wh(.5rem, .6rem);
         }
@@ -271,6 +285,19 @@
               margin-left: .05rem;
             }
           }
+          .add-del-icon{
+            @include flex;
+            div{
+              padding: 0 .15rem;
+              color: #555;
+            }
+            div:nth-of-type(1){
+               color: #3190e8;
+            }
+            div:nth-of-type(3){
+              color: #3190e8;
+           }
+          }
         }
       }
     }
@@ -310,6 +337,12 @@
           font-family: Helvetica Neue,Tahoma,Arial;
         }
       }
+      .active-icon{
+        background-color: #3190e8;
+      }
+      .animate{
+        animation: active .5s ease-in-out;
+      }
       .cart-num{
         @include positionHCenter;
         left: 3.5rem;
@@ -339,8 +372,9 @@
         font-weight: bold;
       }
     }
-    .gotopay-activity{
+    .gotopay-active{
       background-color: #4cd964;
+      animation: active .5s ease-in-out;
     }
   }
   .shop-enter{

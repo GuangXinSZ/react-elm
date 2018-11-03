@@ -18,9 +18,13 @@ class Shop extends Component {
     shopId: "",
     shopDetailData: "",
     show: false,
+    miniMoney: 0,
     active: 'food',
     activeIndex: 0,
     totalPrice: 0,
+    foodList: [],
+    animate: 'cart-icon-container active-icon',
+    displayList: [],
   };
   FirstChild = props => {
     const childrenArray = React.Children.toArray(props.children);
@@ -28,7 +32,38 @@ class Shop extends Component {
   }
   activeMenu = (index) => {
     this.setState({
-      activeIndex: index
+      activeIndex: index,
+      displayList: this.state.menuList[index].foods
+    })
+  }
+  setFoodList = (menu) => {
+    let list = []
+    menu.forEach(item => {
+      list.push(...item.foods)
+    })
+    return list
+  }
+  setNumOfMenu = (menu) => {
+    var count = 0
+    menu.forEach((outer, o)=> {
+        if (menu.length) {
+          outer.foods.forEach((inner, i) => {
+            inner.num = count
+            inner.qty = 0
+            count++
+          }
+      )}
+    })
+    return menu
+  }
+  calculateMoney = () => {
+    let totalPrice = 0
+    this.state.foodList.forEach(item => {
+      totalPrice += item.qty * item.specfoods[0].price
+    })
+    this.setState({
+      totalPrice,
+      miniMoney: this.state.shopDetailData.float_minimum_order_amount - totalPrice
     })
   }
   initData = async id => {
@@ -38,19 +73,45 @@ class Shop extends Component {
     };
     let res = await API.shopDetails({}, id, obj);
     let menu = await API.getfoodMenu({}, {restaurant_id: id})
-    console.log(getImgPath(menu[0].icon_url))
+    menu = this.setNumOfMenu(menu)
+    let foodList = this.setFoodList(menu)
     this.setState({
       shopDetailData: res,
+      miniMoney: res.float_minimum_order_amount,
       shopId: id,
       show: !this.state.show,
-      menuList: menu
+      menuList: menu,
+      foodList,
+      displayList: menu[0].foods,
+      count: 0
     });
   };
+  handleAddFoodCount = (index, type) => {
+    let foodList = this.state.foodList
+    let nextFoodQty = foodList[index].qty + type
+    if (nextFoodQty >= 0) {
+      foodList[index].qty += type 
+    }
+    let nextCount = this.state.count + type
+    this.setState({
+      foodList,
+      count: nextCount<0?0:nextCount,
+      animate: this.state.animate + ' animate'
+    })
+    this.calculateMoney()
+    setTimeout(()=> {
+      this.setState({
+        animate: 'cart-icon-container active-icon',
+      })}, 200)
+  }
   changeShowType = (type) => {
     this.setState({
       active: type,
       show: !this.state.show
     })
+  }
+  goBack = () => {
+    this.props.history.goBack()
   }
   
   componentWillMount() {
@@ -64,7 +125,7 @@ class Shop extends Component {
   render() {
     return (
       <div className="shop-container">
-        <div className="icon-back" />
+        <div className="icon-back" onClick={this.goBack} />
         <header className="shop-detail-header">
           <img
             src={imgUrl + this.state.shopDetailData.image_path}
@@ -149,13 +210,9 @@ class Shop extends Component {
                                     <span className="menu-item-description">{item.description}</span>
                                   </div>
                                   <span className="menu-detail-header-right"></span>
-                                  {/* <p className='description-tip'>
-                                    <span>{item.name}</span>
-                                    {item.description}
-                                  </p> */}
                                 </header>
                                 {
-                                  item.foods.map((food, foodIndex)=> {
+                                  this.state.displayList.map((food, foodIndex)=> {
                                     return (
                                       <div className='menu-detail-list'>
                                         <Link to='/shop/foodDetail' className='menu-detail-link'>
@@ -195,6 +252,11 @@ class Shop extends Component {
                                                 <span>{food.specfoods[0].price}</span>
                                                 {food.specifications.length?<span>起</span>:''}
                                               </div>
+                                              <div className='add-del-icon'>
+                                                <div className='icon-wuuiconsuoxiao' onClick={this.handleAddFoodCount.bind(this, food.num, -1)}></div>
+                                                <div >{this.state.foodList[food.num].qty}</div>
+                                                <div className='icon-wuuiconxiangjifangda' onClick={this.handleAddFoodCount.bind(this, food.num, 1)}></div>
+                                              </div>
                                         </footer>
                                       </div>
                                     )
@@ -209,18 +271,18 @@ class Shop extends Component {
                 </div>
                 <div className="buy-cart-container">
                   <div className='cart-icon-num'>
-                    <div className="cart-icon-container">
-                      <span className='cart-list-length'>1</span>
+                    <div className={this.state.count===0?"cart-icon-container":this.state.animate}>
+                      <span className='cart-list-length'>{this.state.count}</span>
                       <div className='icon-ziyuan'></div>
                     </div>
                     <div className='cart-num'>
                       <div>¥{this.state.totalPrice}</div>
-                      <div>配送费¥{this.state.deliveryFee}</div>
+                      <div>配送费¥{this.state.shopDetailData.float_delivery_fee}</div>
                     </div>
                   </div>
-                  <div className="gotopay">
-                      <div className='gotopay-button-style'>还差¥{}</div>
-                      <div className='gotopay-button-style'>去结算</div>
+                  <div className={this.state.miniMoney>0?"gotopay":'gotopay gotopay-active'}>
+                  {this.state.miniMoney>0?<div className='gotopay-button-style'>还差¥{this.state.miniMoney}起送</div>
+                      :<div className='gotopay-button-style'>去结算</div>}
                   </div>
                 </div>
                </div>}
