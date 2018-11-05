@@ -3,7 +3,6 @@ import {Link, Switch, Route, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Header from '@/components/header/header'
 import {connect} from 'react-redux'
-import API from '../../api/api'
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import './set_user.scss'
 import QueueAnim from 'rc-queue-anim'

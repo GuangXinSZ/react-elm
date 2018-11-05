@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {HashRouter, Switch, Route, Redirect} from 'react-router-dom'
 import asyncComponent from '@/utils/asyncComponent'
-import home from '@/pages/home/home'
 const login = asyncComponent(() => import("@/pages/login/login"))
 const profile = asyncComponent(() => import("@/pages/profile/profile"))
 const info = asyncComponent(() => import("@/pages/info/info"))
@@ -19,9 +18,9 @@ export default class RouteConfig extends Component {
       <HashRouter>
         <Switch>
           <Route path="/" exact component= {profile}/>
-          <Route path="/login" exact component= {login}/>
+          <Route path="/login" component= {login}/>
           <Route path="/info"  component= {info}/>
-          <Route path="/msite"  component= {msite}/>
+          <Route path="/msite" component= {msite}/>
           <Route path="/setuser"  component= {setUser}/>
           <Route path="/shop/:id"  component= {shop}/>
           <Route path="/food/:geohash/:id/:title"  component= {food}/>

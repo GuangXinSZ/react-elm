@@ -47,6 +47,9 @@
 input:focus,select:focus,textarea:focus,button:focus{
   outline: none;
 }
+input{
+  border: none
+}
 
 /*背景色*/
 html, body{

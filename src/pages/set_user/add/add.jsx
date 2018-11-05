@@ -6,7 +6,6 @@ import {resetUserInfo} from '@/store/user/action'
 import {getStore} from '@/utils/commons'
 import QueueAnim from 'rc-queue-anim'
 import './add.scss'
-import API from '../../../api/api'
 
 
 class Address extends Component {

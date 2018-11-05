@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import QueueAnim from 'rc-queue-anim'
 import Header from '@/components/header/header'
 import {resetUserInfo} from '@/store/user/action'
-import envconfig from '@/config/envconfig';   // 环境变量的配置
+import {imgUrl} from '@/config/envconfig';   // 环境变量的配置
 import API from '../../api/api'
 import './info.scss'
 
@@ -29,8 +29,7 @@ class Info extends Component {
       let formdata = new FormData();  // 获取表单
       formdata.append('file', event.target.files[0]);  // 上传的文件
       let result = await API.uploadImg({data: formdata});
-      this.props.resetUserInfo('imgpath', envconfig.imgUrl + result.image_path)
-      console.log(result);
+      this.props.resetUserInfo('imgpath', imgUrl + result.image_path)
     }catch(err){
       console.error(err);
     }
@@ -59,7 +58,7 @@ class Info extends Component {
     })
   }
   goBack = () => {
-    this.props.history.push('/')
+    this.props.history.push('/profile')
   }
   logout = (wait) => {
     if (!wait){

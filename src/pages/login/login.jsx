@@ -68,7 +68,7 @@ class Login extends Component {
       password: this.state.password,
       captcha_code: this.state.codeNumber
     }
-    let res = await API.accountLogin({}, data)
+    let res = await API.accountLogin(data)
     if (res.tip) {
       this.setState({
         hasAlert: true,
@@ -142,17 +142,14 @@ class Login extends Component {
       <p className='login-tips'>
         注册过的用户可凭证账号密码登录
       </p>
-
       <div className='login-button' onClick={this.mobileLogin}>登录</div>
       <Link to='/forget' className='to-forget'>重置密码?</Link>
-      {this.state.hasAlert&&<AlertTip closeTip={this.closeTip} alertText={this.state.alertText}/>}
+      {this.state.hasAlert&&<AlertTip logout={()=> {return false}} closeTip={this.closeTip} alertText={this.state.alertText}/>}
     </div>
     </Animate>
     )
-    
   }
 }
-
 export default connect(state => ({
   userInfo: state.userInfo
 }), {

@@ -17,8 +17,9 @@ class Address extends Component {
   state = {
     refresh:false, //是否编辑状态
   }
+  // 获取用户地址列表
   getAddress = async () =>{
-    const res = await API.getAddress( {},getStore('user_id'))
+    const res = await API.getAddress(getStore('user_id'))
     this.props.resetUserInfo('addressList', res)
   }
   handleDelete = (index) => {

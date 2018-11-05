@@ -1,21 +1,13 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
 import ShopList from '@/components/shop_list/shop_list'
 import Header from '@/components/header/header'
 import './food.scss'
 
 class Food extends Component {
-  static propTypes = {
-
-  }
   state = {
-
   }
   goBack = () =>{
     this.props.history.push('/msite')
-  }
-  componentWillMount () {
   }
   render () {
     return (

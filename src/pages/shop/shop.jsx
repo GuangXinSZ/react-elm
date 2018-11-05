@@ -4,12 +4,11 @@ import { connect } from "react-redux";
 import "./shop.scss";
 import PropTypes from "prop-types";
 import { is, fromJS, toJS  } from 'immutable';  // 保证数据的不可变
-import config from "@/config/envconfig";
+import {imgUrl} from "@/config/envconfig";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import API from "@/api/api";
 import {getImgPath} from '@/utils/commons'
 
-const imgUrl = config.imgUrl;
 class Shop extends Component {
   static propTypes = {
     userInfo: PropTypes.object.isRequired
@@ -85,8 +84,8 @@ class Shop extends Component {
       latitude: this.props.userInfo.geohash[0],
       longitude: this.props.userInfo.geohash[1]
     };
-    let res = await API.shopDetails({}, id, obj);
-    let menu = await API.getfoodMenu({}, {restaurant_id: id})
+    let res = await API.shopDetails(id, obj);
+    let menu = await API.getfoodMenu({restaurant_id: id})
     menu = this.setNumOfMenu(menu)
     let foodList = this.setFoodList(menu)
     this.setState({
@@ -131,11 +130,9 @@ class Shop extends Component {
     })
   }
   goBack = () => {
-    this.props.history.goBack()
+    this.props.history.push('/msite')
   }
-  
   componentWillMount() {
-    console.log(this.props);
     let id = this.props.match.params.id;
     this.initData(id);
   }
@@ -356,7 +353,5 @@ class Shop extends Component {
 export default connect(
   state => ({
     userInfo: state.userInfo
-  }),
-  {
-  }
+  })
 )(Shop);

@@ -24,13 +24,13 @@ class Msite extends Component {
     title: '',
     imgBaseUrl: "https://fuss10.elemecdn.com"
   };
-  getFootTypes = async () => {
+  getFoodTypes = async () => {
     let data = {
       geohash: this.state.geohash,
       "flag[]": "F",
       group_type: 1
     };
-    let res = await API.getFootTypes({}, data);
+    let res = await API.getFoodTypes( data);
     let resLength = res.length;
     let resArr = [...res];
     let foodArr = [];
@@ -50,7 +50,6 @@ class Msite extends Component {
   // 解码url地址，求去restaurant_category_id值
   getCategoryId(url){
     let urlData = decodeURIComponent(url.split('=')[1].replace('&target_name',''));
-    console.log(urlData, '---')
     if (/restaurant_category_id/gi.test(urlData)) {
       console.log(121131313)
       return JSON.parse(urlData).restaurant_category_id.id
@@ -58,8 +57,9 @@ class Msite extends Component {
       return 270
     }
   }
+  // 根据经纬度获取地点信息
   getPoisSite = async (geohash) => {
-    let res = await API.getPoisSite({}, geohash)
+    let res = await API.getPoisSite(geohash)
     this.setState({
       title: res.name
     })
@@ -71,7 +71,7 @@ class Msite extends Component {
     });
     this.props.resetUserInfo('geohash', [res.latitude, res.longitude])
     this.getPoisSite([res.latitude, res.longitude])
-    this.getFootTypes();
+    this.getFoodTypes();
   }
   goHome = () => {
     this.props.history.push('/')

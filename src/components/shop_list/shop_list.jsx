@@ -6,7 +6,7 @@ import API from "../../api/api";
 import PropTypes from 'prop-types'
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import './shop_list.scss'
-import config from '../../config/envconfig'
+import {imgUrl} from '../../config/envconfig'
 
 class ShopList extends Component {
   static propTypes = {
@@ -20,7 +20,7 @@ class ShopList extends Component {
       latitude: props.geohash[0],
       longitude: props.geohash[1]
     }
-    const shopListArr = await API.getShopList({}, obj)
+    const shopListArr = await API.getShopList( obj)
     this.setState({
       shopListArr: shopListArr.slice(1)
     })
@@ -52,7 +52,7 @@ class ShopList extends Component {
             this.state.shopListArr.map((item, index) => {
               return (
               <Link to={'/shop/' + item.id} className='shop-item' key={'l' + index}>
-                  <img src={config.imgUrl + item.image_path} alt=""/>
+                  <img src={imgUrl + item.image_path} alt=""/>
                 <div className='shop-content'>
                   <div className='shop-content-title'>
                     <div className='title-left'>

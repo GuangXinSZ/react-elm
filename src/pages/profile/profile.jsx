@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Header from '@/components/header/header'
 import Footer from '@/components/footer/footer'
+import AlertTip from '@/components/alert_tip/alert_tip'
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import QueueAnim from 'rc-queue-anim'
 import {saveUserInfo} from '@/store/user/action'
+import {getStore} from '@/utils/commons'
 import './profile.scss'
-import Swiper from 'swiper/dist/js/swiper.js'
-import 'swiper/dist/css/swiper.css'
 import {getImgPath} from '../../utils/commons'
 import API from '../../api/api'
 
@@ -25,6 +25,8 @@ class Profile extends Component {
     balance: 0,            //我的余额
     count : 0,             //优惠券个数
     pointNumber : 0,       //积分数
+    hasAlert: '',   // tip是否显示
+    alertText: '请在手机APP中打开',
   }
   initData  = () => {
     let newState = {}
@@ -41,8 +43,25 @@ class Profile extends Component {
     }
     this.setState(newState)
   }
+  handleClick = (type) =>{
+    let alertText
+    console.log(12131)
+    switch (type){
+      case 'download':
+        alertText = '请到官方网站下载'
+        break
+      case 'unfinished':
+        alertText = '功能尚未开发'
+        break
+      default:
+    }
+    this.setState({
+      hasAlert: !this.state.hasAlert,
+      alertText,
+    })
+  }
   getUserInfo = async () => {
-    let res = await API.getUser()
+    let res = await API.getUser({user_id: getStore('user_id')})
     this.props.saveUserInfo(res)
     this.initData()  
   }
@@ -50,7 +69,6 @@ class Profile extends Component {
     this.props.history.goBack()
   }
   componentWillMount () {
-    console.log('dimount')
     if (this.props.userInfo.user_id) {
       this.initData()
       return
@@ -105,13 +123,13 @@ class Profile extends Component {
             </section>
           <section className='profile-list'>
           <QueueAnim deley='0.4'>          
-            <Link to='order' className='myorder' key='i2'>
+            <div onClick={this.handleClick.bind(this, 'unfinished')} className='myorder' key='i2'>
               <div className='icon-dingdan order-icon'></div>
               <div className='myorder-text'>
                 <span>我的订单</span>
                 <div className='icon-arrow-right'></div>
               </div>
-            </Link>
+            </div>
             <a href="https://home.m.duiba.com.cn/#/chome/index" className='myorder' key='i3'>
               <div className='icon-jifen1 order-icon'></div>
               <div className='myorder-text'>
@@ -119,32 +137,33 @@ class Profile extends Component {
                 <div className='icon-arrow-right'></div>
               </div>
             </a>
-            <Link to='order' className='myorder' key='i4' >
+            <div onClick={this.handleClick.bind(this, 'unfinished')} className='myorder' key='i4' >
               <div className='icon-huangguan order-icon'></div>
               <div className='myorder-text'>
                 <span>饿了么会员卡</span>
                 <div className='icon-arrow-right'></div>
               </div>
-            </Link>
-            <Link to='order' className='myorder' key='i5'>
+            </div>
+            <div onClick={this.handleClick.bind(this, 'unfinished')} className='myorder' key='i5'>
               <div className='icon-yk_fangkuai_fill order-icon'></div>
               <div className='myorder-text'>
                 <span>服务中心</span>
                 <div className='icon-arrow-right'></div>
               </div>
-            </Link>
-            <Link to='order' className='myorder' key='i6'>
+            </div>
+            <div  onClick={this.handleClick.bind(this, 'download')} className='myorder' key='i6'>
               <div className='icon-changyonglogo40 order-icon'></div>
               <div className='myorder-text'>
                 <span>下载饿了么APP</span>
                 <div className='icon-arrow-right'></div>
               </div>
-            </Link>
+            </div>
         </QueueAnim>
           </section>
         </section>
         <Footer key='s3'/>
         </QueueAnim>
+      {this.state.hasAlert&&<AlertTip logout={()=> {return false}}  closeTip={this.handleClick} alertText={this.state.alertText}/>}
       </div>
     )
   }
