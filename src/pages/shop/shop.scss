@@ -461,14 +461,14 @@
   }
   .cart-enter.cart-enter-active{
     transform: scale(1.0) translateY(1.5rem);
-    transition: all .5s ease;
+    transition: all .3s ease;
   }
   
   .cart-leave{
     transform: scale(1.0) translateY(1.5rem);
   }
   .cart-leave.cart-leave-active{
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
     transform: scale(0.2);
   }
 

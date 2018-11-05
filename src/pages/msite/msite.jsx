@@ -47,6 +47,17 @@ class Msite extends Component {
       loop: true,
     });
   };
+  // 解码url地址，求去restaurant_category_id值
+  getCategoryId(url){
+    let urlData = decodeURIComponent(url.split('=')[1].replace('&target_name',''));
+    console.log(urlData, '---')
+    if (/restaurant_category_id/gi.test(urlData)) {
+      console.log(121131313)
+      return JSON.parse(urlData).restaurant_category_id.id
+    }else{
+      return 270
+    }
+  }
   getPoisSite = async (geohash) => {
     let res = await API.getPoisSite({}, geohash)
     this.setState({
@@ -97,7 +108,7 @@ class Msite extends Component {
                   <div className="swiper-slide food-types-container" key={index}>
                     {foodItem.map((item, index) => {
                       return (
-                        <Link className="link-to-food" to="/food" key={index}>
+                        <Link className="link-to-food" to={`/food/${this.state.geohash}/${this.getCategoryId(item.link)}/${item.title}`} key={index}>
                           <figure>
                             <img
                               src={this.state.imgBaseUrl + item.image_url}

@@ -8,6 +8,8 @@ const info = asyncComponent(() => import("@/pages/info/info"))
 const setUser = asyncComponent(() => import("@/pages/set_user/set_user"))
 const msite = asyncComponent(() => import("@/pages/msite/msite"))
 const shop = asyncComponent(() => import("@/pages/shop/shop"))
+const food = asyncComponent(() => import("@/pages/food/food"))
+
 
 
 export default class RouteConfig extends Component {
@@ -16,12 +18,13 @@ export default class RouteConfig extends Component {
     return (
       <HashRouter>
         <Switch>
-          <Route path="/" exact  component= {profile}/>
+          <Route path="/" exact component= {profile}/>
           <Route path="/login" exact component= {login}/>
           <Route path="/info"  component= {info}/>
           <Route path="/msite"  component= {msite}/>
           <Route path="/setuser"  component= {setUser}/>
           <Route path="/shop/:id"  component= {shop}/>
+          <Route path="/food/:geohash/:id/:title"  component= {food}/>
           <Route component= {profile}/>
         </Switch>
       </HashRouter>
