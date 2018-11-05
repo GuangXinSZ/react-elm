@@ -1,23 +1,17 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import './alert_tip.scss'
 
 class AlertTip extends Component {
   static propTypes = {
-    alertText: PropTypes.string.isRequired,
-    closeTip: PropTypes.func.isRequired,
-    logout: PropTypes.func
+    alertText: PropTypes.string.isRequired,  // 提示内容
+    closeTip: PropTypes.func.isRequired,   // 关闭
+    logout: PropTypes.func   // 退出
   }
-  state = {
-    positionY: 0,
-    timer: null
-  }
-  handleClick = () => {
+  handleClick = () => {  // 关闭
     this.props.closeTip()
   }
-  handleLogout = () => {
+  handleLogout = () => {  // 退出登录
     this.props.logout()
   }
   render () {

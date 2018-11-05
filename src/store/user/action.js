@@ -14,6 +14,5 @@ export const resetUserInfo = (datatype, value) => {
     type: user.RESET_USERINFO,
     datatype,
     value,
-
   }
 }

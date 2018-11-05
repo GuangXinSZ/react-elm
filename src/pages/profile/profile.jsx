@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link, Switch, Route, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Header from '@/components/header/header'
@@ -21,13 +21,14 @@ class Profile extends Component {
   state = {
     username: '登录/注册',
     mobile: '暂无绑定手机',
-    imgpath: '',
-    balance: 0,            //我的余额
-    count : 0,             //优惠券个数
-    pointNumber : 0,       //积分数
+    imgpath: '',   // 图片路径
+    balance: 0,     //我的余额
+    count : 0,       //优惠券个数
+    pointNumber : 0, //积分数
     hasAlert: '',   // tip是否显示
     alertText: '请在手机APP中打开',
   }
+  // 初始化数据
   initData  = () => {
     let newState = {}
     if (this.props.userInfo && this.props.userInfo.user_id) {
@@ -45,7 +46,6 @@ class Profile extends Component {
   }
   handleClick = (type) =>{
     let alertText
-    console.log(12131)
     switch (type){
       case 'download':
         alertText = '请到官方网站下载'
@@ -60,6 +60,7 @@ class Profile extends Component {
       alertText,
     })
   }
+  // 获取用户信息
   getUserInfo = async () => {
     let res = await API.getUser({user_id: getStore('user_id')})
     this.props.saveUserInfo(res)

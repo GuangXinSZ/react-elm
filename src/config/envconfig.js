@@ -1,7 +1,6 @@
 // 全局配置
 
 let baseUrl = ''
-let routerMode = 'hash'
 let imgUrl
 if (process.env.NODE_ENV === 'development'){
   imgUrl = '//elm.cangdu.org/img/'
@@ -12,7 +11,6 @@ if (process.env.NODE_ENV === 'development'){
 
 export  {
   baseUrl,
-  routerMode,
   imgUrl
 }
 

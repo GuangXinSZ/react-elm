@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {resetUserInfo} from '@/store/user/action'
-import {getStore} from '@/utils/commons'
 import QueueAnim from 'rc-queue-anim'
 import './add.scss'
 
@@ -30,6 +29,7 @@ class Address extends Component {
     telephone: '',
     standbytele: '',
   }
+  // 添加地址
   handleAdd = () => {
     let hasAddressList = this.props.userInfo.hasAddressList
     hasAddressList.push({
@@ -51,7 +51,6 @@ class Address extends Component {
         message: this.props.userInfo.temMessage
       })
     }
-    // if (this.props.location)
   }
   bindThing = () => {
     if (this.state.message && this.state.mesthree && !this.verifyfour) {
@@ -64,12 +63,14 @@ class Address extends Component {
       })
     }
   }
+  // 校验
   messageVali = (value) => {
     this.setState({
       verify: value?false:true
     })
     this.bindThing()
   }
+  // 校验
   mesthreeVali = (value) => {
     let sendaddress
     let verifythree = true
@@ -87,6 +88,7 @@ class Address extends Component {
     })
     this.bindThing()
   }
+  // 校验
   teleVali = (value) => {
     let telephone
     let verifyfour = true
@@ -103,6 +105,7 @@ class Address extends Component {
     })
     this.bindThing()
   }
+  // 校验
   standbyVali = (value) => {
     let standbytele
     let verifyfive = true
@@ -120,7 +123,6 @@ class Address extends Component {
   saveMessage = () => {
     this.props.resetUserInfo('temMessage', this.state.message)
   }
-
   handleInput = (type, e) => {
     let newState = {}
     let value = e.target.value

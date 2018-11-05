@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link, Switch, Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { is, fromJS } from 'immutable';
 import AlertTip from '@/components/alert_tip/alert_tip'
 import {connect} from 'react-redux'
@@ -28,13 +28,15 @@ class Info extends Component {
     try{
       let formdata = new FormData();  // 获取表单
       formdata.append('file', event.target.files[0]);  // 上传的文件
-      let result = await API.uploadImg({data: formdata});
+      let result = await API.uploadImg(formdata);
       this.props.resetUserInfo('imgpath', imgUrl + result.image_path)
     }catch(err){
       console.error(err);
     }
   }
-
+    /*
+  处理提示
+   */
   handleClick = (type) =>{
     let alertText
     let logout = false
@@ -57,18 +59,22 @@ class Info extends Component {
       logout
     })
   }
+  /*
+  返回
+   */
   goBack = () => {
     this.props.history.push('/profile')
   }
+  /*
+  退出
+   */
   logout = (wait) => {
     if (!wait){
       this.props.history.push('/login')
     }
     return this.state.logout
   }
-  componentWillMount () {
-  }
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {  // 判断是否要更新render, return true 更新  return false不更新
     return !is(fromJS(this.props), fromJS(nextProps))|| !is(fromJS(this.state),fromJS(nextState))
   }
   render () {

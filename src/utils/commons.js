@@ -29,7 +29,11 @@ export const removeStore = name => {
   window.localStorage.removeItem(name)
 }
 
-// 用于get方法后面参数的拼接，传入data是对象
+
+/**
+ * 用于get方法后面参数的拼接，传入data是对象
+ * @param {*} name 
+ */
 export const getUrlConcat = function (data) {
   let dataStr = ''; //数据拼接字符串
   let url = ''
@@ -43,6 +47,9 @@ export const getUrlConcat = function (data) {
   return url
 }
 
+/**
+ * 处理图片路径
+ */
 export const getImgPath = (path) => {
   //传递过来的图片地址需要处理后才能正常使用(path) {
     let suffix;

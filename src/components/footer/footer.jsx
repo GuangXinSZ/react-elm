@@ -1,16 +1,9 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
-import {connect} from 'react-redux'
 import './footer.scss'
 import '../../assets/iconfont/iconfont.js';
 
 class Footer extends Component {
-  static propTypes = {
-
-  }
-  state = {
-
-  }
   render () {
     return (
       <section className='footer-container'>

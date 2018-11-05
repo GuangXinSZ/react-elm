@@ -75,9 +75,9 @@ class API extends Server{
    *  @method post
    *  @return {promise}
    */
-  async uploadImg(){
+  async uploadImg(data){
     try{
-      let result = await this.axios('post', '//elm.cangdu.org/v1/addimg/shop'); 
+      let result = await this.axios('post', '//elm.cangdu.org/v1/addimg/shop', data); 
       if(result && result.status === 1){
         return result;
       }else{

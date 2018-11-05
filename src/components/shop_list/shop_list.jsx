@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
-import Header from '@/components/header/header'
 import API from "../../api/api";
 import PropTypes from 'prop-types'
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
@@ -10,10 +8,10 @@ import {imgUrl} from '../../config/envconfig'
 
 class ShopList extends Component {
   static propTypes = {
-    geohash: PropTypes.array.isRequired
+    geohash: PropTypes.array.isRequired  // 经纬度信息
   }
   state = {
-    shopListArr: []
+    shopListArr: []  // 商店列表
   }
   getShopList = async (props) => {
     let obj = {
@@ -37,6 +35,7 @@ class ShopList extends Component {
     }
     return refresh
   }
+  // 评价星星
   starCount = (rating) => {
     var items = []
     for ( var i = 0; i < Math.ceil(rating);i++){

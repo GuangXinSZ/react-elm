@@ -1,4 +1,4 @@
-(function (doc, win) {
+(function (doc, win) {  // 自适应
   var docEl = doc.documentElement,
     resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
     recalc = function () {

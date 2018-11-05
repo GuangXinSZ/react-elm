@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {HashRouter, Switch, Route, Redirect} from 'react-router-dom'
+import {HashRouter, Switch, Route} from 'react-router-dom'
 import asyncComponent from '@/utils/asyncComponent'
 const login = asyncComponent(() => import("@/pages/login/login"))
 const profile = asyncComponent(() => import("@/pages/profile/profile"))
@@ -9,10 +9,7 @@ const msite = asyncComponent(() => import("@/pages/msite/msite"))
 const shop = asyncComponent(() => import("@/pages/shop/shop"))
 const food = asyncComponent(() => import("@/pages/food/food"))
 
-
-
 export default class RouteConfig extends Component {
-
   render () {
     return (
       <HashRouter>

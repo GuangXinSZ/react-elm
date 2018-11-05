@@ -1,11 +1,8 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import './header.scss'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
-import {resetUserInfo} from '@/store/user/action'
-
 
 class Header extends Component {
   static propTypes = {

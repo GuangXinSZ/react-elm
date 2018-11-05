@@ -4,8 +4,6 @@ import Header from '@/components/header/header'
 import './food.scss'
 
 class Food extends Component {
-  state = {
-  }
   goBack = () =>{
     this.props.history.push('/msite')
   }

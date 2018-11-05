@@ -82,11 +82,18 @@ class Login extends Component {
     this.props.history.push('/profile')
   }
 
+    /*
+    改变密码可见
+   */
   changePasswordType = () => {
     this.setState({
       showPwd: !this.state.showPwd
     })
   }
+
+  /*
+    获取验证码
+   */
   getCaptchaCode = async () => {
     let res = await API.getCaptchaCode()
     this.setState({
@@ -97,7 +104,6 @@ class Login extends Component {
     this.props.history.goBack()
   }
   componentWillMount () {
-    console.log(this.props, 'rpops')
     this.getCaptchaCode()
   }
   render() {

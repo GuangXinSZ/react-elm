@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link, Switch, Route, Redirect} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Header from '@/components/header/header'
 import {connect} from 'react-redux'
