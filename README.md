@@ -12,9 +12,9 @@
 # 技术栈
 react4 + react-redux + react-router + es6 + axios + sass + webpack
 # 说明
-> 觉得对你有帮助,请点右上角的`Star`支持一下
-> bailicangdu大神的项目地址![点这里](https://github.com/bailicangdu/vue2-elm)
-> 推荐一下我的另一个项目基于vue的UI框架 ![点这里](https://github.com/liuyangjike/JKUI)
+> 觉得对你有帮助,请点右上角的`Star`支持一下</br>
+> bailicangdu大神的项目地址[点这里]:https://github.com/bailicangdu/vue2-elm:</br>
+> 推荐一下我的另一个项目基于vue的UI框架 [点这里]:https://github.com/liuyangjike/JKUI
 # 项目运行
 node >= 6.0
 ```
