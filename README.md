@@ -11,3 +11,4 @@ react4 + react-redux + react-router + es6 + axios + sass + webpack
 >  npm run start
 # 截图
 <img src="https://s1.ax1x.com/2018/11/06/iofdjU.png"  width="200" height="320")![iof1BQ.png](https://s1.ax1x.com/2018/11/06/iof1BQ.png)
+<img src="https://s1.ax1x.com/2018/11/06/iof1BQ.png" alt="iof1BQ.png" border="0" />
