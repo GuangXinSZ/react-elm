@@ -24,7 +24,7 @@ react4 + react-redux + react-router + es6 + axios + sass + webpack
   npm run start
 ```
 # 演示
-[demo](http://wwww.jikeliu.top)
+[demo](http://www.jikeliu.top)
 > 请用Chrome调试的手机模式查看
 
 
