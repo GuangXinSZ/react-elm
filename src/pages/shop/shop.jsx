@@ -88,6 +88,7 @@ class Shop extends Component {
     let menu = await API.getfoodMenu({restaurant_id: id})
     menu = this.setNumOfMenu(menu)
     let foodList = this.setFoodList(menu)
+    console.log(res)
     this.setState({
       shopDetailData: res,
       miniMoney: res.float_minimum_order_amount,
@@ -172,7 +173,7 @@ class Shop extends Component {
               </div>
               <div className="icon-arrow-right" />
             </Link>
-            {this.state.shopDetailData ? (
+            {this.state.shopDetailData && this.state.shopDetailData.activities.length ? (
               <footer className="description-footer">
                 <p className='ellipsis'>
                   <span className="tip-icon">
@@ -220,7 +221,7 @@ class Shop extends Component {
                           {
                             this.state.menuList.slice(this.state.activeIndex, this.state.activeIndex + 1 ).map((item, index) => {
                               return (
-                                <li>
+                                <li key={index}>
                                 <header className='menu-detail-header'>
                                   <div className="menu-detail-header-left">
                                     <strong className="menu-item-title">{item.name}</strong>
@@ -231,7 +232,7 @@ class Shop extends Component {
                                 {
                                   this.state.displayList.map((food, foodIndex)=> {
                                     return (
-                                      <div className='menu-detail-list'>
+                                      <div className='menu-detail-list' key={foodIndex}>
                                         <Link to='/shop/foodDetail' className='menu-detail-link'>
                                           <div className='menu-food-img'>
                                             <img src={imgUrl+ food.image_path} alt=""/>

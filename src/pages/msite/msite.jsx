@@ -51,7 +51,6 @@ class Msite extends Component {
   getCategoryId(url){
     let urlData = decodeURIComponent(url.split('=')[1].replace('&target_name',''));
     if (/restaurant_category_id/gi.test(urlData)) {
-      console.log(121131313)
       return JSON.parse(urlData).restaurant_category_id.id
     }else{
       return 270

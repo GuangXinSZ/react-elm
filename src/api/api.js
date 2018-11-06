@@ -193,7 +193,7 @@ class API extends Server{
    */
   async cityGuess( keyword){
     try{
-      let result = await this.axios('get', '/v1/cities/?type=guess'); 
+      let result = await this.axios('get', '/v1/cities?type=guess'); 
       if(result){
         return result;
       }else{
