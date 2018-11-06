@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "./shop.scss";
 import PropTypes from "prop-types";
-import { is, fromJS, toJS  } from 'immutable';  // 保证数据的不可变
+import { is, fromJS  } from 'immutable';  // 保证数据的不可变
 import {imgUrl} from "@/config/envconfig";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import API from "@/api/api";
@@ -342,7 +342,6 @@ class Shop extends Component {
                     </div>
                     }
                 </ReactCSSTransitionGroup>
-
                </div>}
       </ReactCSSTransitionGroup>
       </div>

@@ -11,11 +11,11 @@ class Footer extends Component {
           <div className='icon-changyonglogo40 icon-style'></div>
           <span className='spec-text'>外卖</span>
         </NavLink>
-        <NavLink className='guide-item' to='profile1'>
+        <NavLink className='guide-item' to='/technology'>
           <div className='icon-zhinanzhen icon-style'></div>
           <span>搜索</span>
         </NavLink>
-        <NavLink className='guide-item' to='profile1'>
+        <NavLink className='guide-item' to='/technology'>
           <div className='icon-dingdan icon-style'></div>
           <span>订单</span>
         </NavLink>
