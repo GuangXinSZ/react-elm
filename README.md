@@ -11,6 +11,10 @@
 该项目是饿了吗, 目前开发了登录、注册、购物车、商品展示、用户信息等,算一个比较完整的项目,这个项目比较复杂,这也是我选这个项目的原因
 # 技术栈
 react4 + react-redux + react-router + es6 + axios + sass + webpack
+# 说明
+> 觉得对你有帮助,请点右上角的`Star`支持一下
+> bailicangdu大神的项目地址![点这里](https://github.com/bailicangdu/vue2-elm)
+> 推荐一下我的另一个项目基于vue的UI框架 ![点这里](https://github.com/liuyangjike/JKUI)
 # 项目运行
 node >= 6.0
 ```
@@ -20,6 +24,7 @@ node >= 6.0
   npm run start
 ```
 
+
 # 截图
 <img src="https://s1.ax1x.com/2018/11/06/iofdjU.png" width="325" height="620"/> &#160;&#160;<img src="https://s1.ax1x.com/2018/11/06/iof1BQ.png" width="325" height="620"/>
 <img src="https://s1.ax1x.com/2018/11/06/iof0uF.png" width="325" height="620"/> &#160;&#160;<img src="https://s1.ax1x.com/2018/11/06/iooQTe.png" width="325" height="620"/>
@@ -28,12 +33,10 @@ node >= 6.0
 
 # 项目结构
 ```javascript
-.
-├── README.md      -----------------------README
-├── build          -----------------------网页配置
+├── build          ----------------------网页配置
 │   ├── favicon.ico  
 │   └── manifest.json 
-├── config            -------------------webpack配置
+├── config            ------------------webpack配置
 │   ├── env.js       
 │   ├── jest          
 │   │   ├── cssTransform.js
@@ -43,17 +46,17 @@ node >= 6.0
 │   ├── webpack.config.prod.js
 │   └── webpackDevServer.config.js
 ├── package-lock.json
-├── package.json    ---------------------项目package.json
-├── public          ---------------------出口
+├── package.json    --------------------项目package.json
+├── public          --------------------出口
 │   ├── favicon.ico
 │   ├── index.html
 │   └── manifest.json
-├── scripts        ----------------------运行的脚本
+├── scripts        ---------------------运行的脚本
 │   ├── build.js
 │   ├── start.js
 │   └── test.js
-├── src           -----------------------源码目录
-│   ├── api       -----------------------API目录
+├── src           ----------------------源码目录
+│   ├── api       ----------------------API目录
 │   │   ├── api.js
 │   │   └── server.js
 │   ├── assets   -----------------------资源目录
@@ -87,9 +90,10 @@ node >= 6.0
 │   │   ├── base.scss
 │   │   ├── mixin.scss
 │   │   └── swiper.min.css
-│   └── utils  -----------------------公用方法
-│       ├── asyncComponent.jsx  ------异步加载组件
-│       └── commons.js  --------------公用方法
-└── tree.md  -------------------------项目结构
+│   └── utils  ------------------------公用方法
+│       ├── asyncComponent.jsx  -------异步加载组件
+│       └── commons.js  ---------------公用方法
+├── README.md      ----------------------README
+└── tree.md  --------------------------项目结构
 
 ```
