@@ -12,8 +12,8 @@
 # 技术栈
 react4 + react-redux + react-router + es6 + axios + sass + webpack
 # 项目运行
+node >= 6.0
 ```
-  node >= 6.0
   git clone git@github.com:liuyangjike/react-elm.git
   cd react-lem
   npm install 或用 cnpm
