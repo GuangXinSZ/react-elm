@@ -10,4 +10,4 @@ react4 + react-redux + react-router + es6 + axios + sass + webpack
 >  npm install 或用 cnpm
 >  npm run start
 # 截图
-<img src="https://s1.ax1x.com/2018/11/06/iofdjU.png" width="365" height="619"/> <img src="https://s1.ax1x.com/2018/11/06/iof1BQ.png" width="365" height="619"/>
+<img src="https://s1.ax1x.com/2018/11/06/iofdjU.png" width="325" padding-right="20" height="620"/> <img src="https://s1.ax1x.com/2018/11/06/iof1BQ.png" width="325" height="620"/>
