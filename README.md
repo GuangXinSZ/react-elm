@@ -16,4 +16,5 @@ react4 + react-redux + react-router + es6 + axios + sass + webpack
 <img src="https://s1.ax1x.com/2018/11/06/iofdjU.png" width="325" height="620"/> &#160;&#160;<img src="https://s1.ax1x.com/2018/11/06/iof1BQ.png" width="325" height="620"/>
 <img src="https://s1.ax1x.com/2018/11/06/iof0uF.png" width="325" height="620"/> &#160;&#160;<img src="https://s1.ax1x.com/2018/11/06/io4Cee.png" width="325" height="620"/>
 <img src="https://s1.ax1x.com/2018/11/06/iofBB4.png" width="325" height="620"/> &#160;&#160;<img src="https://s1.ax1x.com/2018/11/06/io5MjK.gif" width="325" height="620"/>
+<img src="https://s1.ax1x.com/2018/11/06/io50u8.gif" width="325" height="620"/> &#160;&#160;<img src="https://s1.ax1x.com/2018/11/06/io5MjK.gif" width="325" height="620"/>
 
