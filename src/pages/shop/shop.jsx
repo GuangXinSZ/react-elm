@@ -6,7 +6,8 @@ import PropTypes from "prop-types";
 import { is, fromJS  } from 'immutable';  // 保证数据的不可变
 import {imgUrl} from "@/config/envconfig";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import API from "@/api/api";
+import API from "@/api/api"
+import AlertTip from '@/components/alert_tip/alert_tip'
 import {getImgPath} from '@/utils/commons'
 
 class Shop extends Component {
@@ -18,6 +19,7 @@ class Shop extends Component {
     shopDetailData: "",
     show: false,
     miniMoney: 0,
+    alertText: '请在手机APP中打开',
     active: 'food',
     activeIndex: 0,
     initList: [],
@@ -60,6 +62,23 @@ class Shop extends Component {
       )}
     })
     return menu
+  }
+  handleClick = (type) =>{
+    console.log('222')
+    let alertText
+    switch (type){
+      case 'download':
+        alertText = '请到官方网站下载'
+        break
+      case 'unfinished':
+        alertText = '功能尚未开发'
+        break
+      default:
+    }
+    this.setState({
+      hasAlert: !this.state.hasAlert,
+      alertText,
+    })
   }
   calculateMoney = () => {
     let totalPrice = 0
@@ -298,9 +317,9 @@ class Shop extends Component {
                       <div>配送费¥{this.state.shopDetailData.float_delivery_fee}</div>
                     </div>
                   </div>
-                  <div className={this.state.miniMoney>0?"gotopay":'gotopay gotopay-active'}>
+                  <div onClick={this.handleClick.bind(this, 'unfinished')} className={this.state.miniMoney>0?"gotopay":'gotopay gotopay-active'}>
                   {this.state.miniMoney>0?<div className='gotopay-button-style'>还差¥{this.state.miniMoney}起送</div>
-                      :<div className='gotopay-button-style'>去结算</div>}
+                      :<div  className='gotopay-button-style'>去结算</div>}
                   </div>
                 </div>
                 <ReactCSSTransitionGroup
@@ -321,7 +340,7 @@ class Shop extends Component {
                             {this.state.foodList.map((cart, index) => {
                               return cart.qty===0?'':
                                 (
-                                  <li className='cart-food-li'>
+                                  <li className='cart-food-li' key={index}>
                                     <div className='cart-list-num'>
                                       <p>{cart.name}</p>
                                       <p>{cart.specs}</p>
@@ -345,6 +364,7 @@ class Shop extends Component {
                 </ReactCSSTransitionGroup>
                </div>}
       </ReactCSSTransitionGroup>
+      {this.state.hasAlert&&<AlertTip logout={()=> {return false}}  closeTip={this.handleClick} alertText={this.state.alertText}/>}
       </div>
     );
   }
